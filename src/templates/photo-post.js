@@ -16,7 +16,7 @@ class PhotoPostTemplate extends React.Component {
     const images = this.props.data.images2.edges
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={this.props.location} title={siteTitle} isPhoto>
         <SEO title={post.frontmatter.title} description={post.excerpt} />
         <h1>[PHOTO] {post.frontmatter.title}</h1>
         <p

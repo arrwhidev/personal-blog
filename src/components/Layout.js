@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
 import { rhythm, scale } from '../utils/typography'
+import styled from 'styled-components'
+import { media } from '../utils/styles';
 
 class Layout extends React.Component {
   render() {
-    const { location, title, children } = this.props
+    const { location, title, children, isPhoto } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
     let header
 
@@ -52,15 +53,28 @@ class Layout extends React.Component {
         </h3>
       )
     }
+
+    const Wrapper = styled.div`
+      margin-left: auto;
+      margin-right: auto;
+      padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+
+      ${media.giant`
+          max-width: ${rhythm(48)};
+      `}
+      ${media.desktop`
+          max-width: ${rhythm(28)};
+      `}
+      ${media.tablet`
+          max-width: ${rhythm(24)};
+      `}
+      ${media.phone`
+          max-width: ${rhythm(24)};
+      `}
+    `
+
     return (
-      <div
-        style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
+      <Wrapper>
         {header}
         {children}
         <footer>
@@ -68,7 +82,7 @@ class Layout extends React.Component {
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
-      </div>
+      </Wrapper>
     )
   }
 }
