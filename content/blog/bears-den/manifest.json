@@ -1,12 +1,29 @@
 { 
         "blog": "bears-den",
-        "images": [
-                { "name": "original-1.jpg", "type": "full" },
-                { "name": "original-2.jpg", "type": "third" },
-                { "name": "original-3.jpg", "type": "third" },
-                { "name": "original-4.jpg", "type": "third" },
-                { "name": "original-5.jpg", "type": "half" },
-                { "name": "original-6.jpg", "type": "half" },
-                { "name": "original-7.jpg", "type": "full" }
+        "content": [
+                { "c": "p", "value": "Bears Den photos blah blah etc" },
+                { 
+                        "c": "Grid", 
+                        "images": [
+                                { "name": "original-1.jpg", "type": "full" },
+                                { "name": "original-2.jpg", "type": "third" },
+                                { "name": "original-3.jpg", "type": "third" },
+                                { "name": "original-4.jpg", "type": "third" },
+                                { "name": "original-5.jpg", "type": "half" },
+                                { "name": "original-6.jpg", "type": "half" },
+                                { "name": "original-7.jpg", "type": "full" }
+                        ]
+                },
+                { "c": "p", "value": "More text hello there!" },
+                { 
+                        "c": "Grid", 
+                        "images": [
+                                { "name": "original-2.jpg", "type": "third" },
+                                { "name": "original-3.jpg", "type": "third" },
+                                { "name": "original-4.jpg", "type": "third" },
+                                { "name": "original-5.jpg", "type": "half" },
+                                { "name": "original-6.jpg", "type": "half" }
+                        ]
+                }
         ]
 }

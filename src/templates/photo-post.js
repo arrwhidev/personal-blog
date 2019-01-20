@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-import Grid from '../components/Grid';
+import ManifestRenderer from '../components/ManifestRenderer'
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
@@ -35,7 +35,7 @@ class PhotoPostTemplate extends React.Component {
           {post.frontmatter.date}
         </p>
         <MDXRenderer>{post.code.body}</MDXRenderer>
-        <Grid images={images} manifest={manifest} />
+        <ManifestRenderer manifest={manifest} images={images} />        
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -61,9 +61,13 @@ export const pageQuery = graphql`
       edges {
         node {
           blog
-          images {
-            name
-            type
+          content {
+            c
+            value
+            images {
+              name
+              type
+            }
           }
         }
       }
