@@ -1,0 +1,7 @@
+{ 
+    "blog": "canada",
+    "images": [
+            { "name": "canada1.jpg", "type": "full" },
+            { "name": "canada2.jpg", "type": "full" }
+    ]
+}

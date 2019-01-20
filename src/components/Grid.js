@@ -6,7 +6,8 @@ import { media } from '../utils/styles';
 export default
 class Grid extends React.Component {
     render() {
-        const { images } = this.props;
+        const { images, manifest } = this.props;
+
         const GridLayout = styled.div`
             display: grid;
             grid-gap: 10px;
@@ -82,16 +83,16 @@ class Grid extends React.Component {
                 fluid={image.node.childImageSharp.fluid}
             />)
         }
+        const content = manifest.images.map(({name, type}) => {
+            const img = images.find(i => {
+                return i.node.childImageSharp.fluid.src.endsWith(name);
+            })
+            return renderImage(img, type)
+        })
 
         return (
             <GridLayout>
-                {renderImage(images[0], 'full')}
-                {renderImage(images[1], 'third')}
-                {renderImage(images[1], 'third')}
-                {renderImage(images[1], 'third')}
-                {renderImage(images[2], 'half')}
-                {renderImage(images[2], 'half')}
-                {renderImage(images[3], 'full')}
+                {content}
             </GridLayout>
         )
     }     

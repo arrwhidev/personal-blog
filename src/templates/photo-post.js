@@ -14,6 +14,10 @@ class PhotoPostTemplate extends React.Component {
     const post = this.props.data.mdx
     const siteTitle = this.props.data.site.siteMetadata.title
     const images = this.props.data.images2.edges
+    
+    const { slug } = this.props.pageContext
+    const manifests = this.props.data.allJson.edges.map(({node}) => node)
+    const manifest = manifests.filter(({blog}) => slug.includes(blog))[0]
 
     return (
       <Layout location={this.props.location} title={siteTitle} isPhoto>
@@ -31,7 +35,7 @@ class PhotoPostTemplate extends React.Component {
         </p>
         <MDXRenderer>{post.code.body}</MDXRenderer>
         
-        <Grid images={images}/>
+        <Grid images={images} manifest={manifest} />
 
         <hr
           style={{
@@ -52,6 +56,17 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+      }
+    }
+    allJson {
+      edges {
+        node {
+          blog
+          images {
+            name
+            type
+          }
+        }
       }
     }
     images2: allFile(
