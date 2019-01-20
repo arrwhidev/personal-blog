@@ -1,9 +1,7 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-import Img from 'gatsby-image';
 import Grid from '../components/Grid';
-
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
@@ -11,16 +9,19 @@ import { rhythm, scale } from '../utils/typography'
 
 class PhotoPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.mdx
-    const siteTitle = this.props.data.site.siteMetadata.title
-    const images = this.props.data.images2.edges
-    
-    const { slug } = this.props.pageContext
-    const manifests = this.props.data.allJson.edges.map(({node}) => node)
-    const manifest = manifests.filter(({blog}) => slug.includes(blog))[0]
+    const { data, pageContext, location } = this.props
+    const { slug } = pageContext
+    const siteTitle = data.site.siteMetadata.title
+    const post = data.mdx
+
+    // Photos and manifest.
+    const images = data.images.edges
+    const manifest = data.allJson.edges
+      .map(({ node }) => node)
+      .filter(({ blog }) => slug.includes(blog))[0]
 
     return (
-      <Layout location={this.props.location} title={siteTitle} isPhoto>
+      <Layout location={location} title={siteTitle} isPhoto>
         <SEO title={post.frontmatter.title} description={post.excerpt} />
         <h1>[PHOTO] {post.frontmatter.title}</h1>
         <p
@@ -34,9 +35,7 @@ class PhotoPostTemplate extends React.Component {
           {post.frontmatter.date}
         </p>
         <MDXRenderer>{post.code.body}</MDXRenderer>
-        
         <Grid images={images} manifest={manifest} />
-
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -69,7 +68,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    images2: allFile(
+    images: allFile(
       filter: {
         absolutePath: { regex: $absolutePathRegex }
         extension: { regex: "/(jpg)|(png)|(tif)|(tiff)|(webp)|(jpeg)/" }
