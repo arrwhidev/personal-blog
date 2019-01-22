@@ -20,29 +20,71 @@ class PhotoPostTemplate extends React.Component {
       .map(({ node }) => node)
       .filter(({ blog }) => slug.includes(blog))[0]
 
-    return (
-      <Layout location={location} title={siteTitle} isPhoto>
-        <SEO title={post.frontmatter.title} description={post.excerpt} />
-        <h1>[PHOTO] {post.frontmatter.title}</h1>
-        <p
+      return (
+      <div>
+        <figure style={{
+          width: '100%',
+          height: `100vh`,
+          overflow: 'hidden',
+          margin: 0
+        }}>
+          <img 
+          src="https://exposure.imgix.net/production/posts/68825/cover-photo/cover-1414101129.jpg?w=3600&q=50&sharp=10&fit=crop&fm=pjpg&auto=format"
           style={{
-            ...scale(-1 / 5),
-            display: `block`,
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
-          {post.frontmatter.date}
-        </p>
-        <MDXRenderer>{post.code.body}</MDXRenderer>
-        <ManifestRenderer manifest={manifest} images={images} />        
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <Bio />
-      </Layout>
+            display: 'block',
+            objectFit: 'cover',
+            width: '100%',
+            height: `100vh`,
+          }}></img>
+
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            position: 'absolute',
+            top: '0px',
+            left: '0px',
+            width: '100%',
+            height: `100vh`,
+            }}>
+            
+            <div style={{ 
+              display: 'block',
+              position: 'relative',
+              textAlign: 'center',
+              marginLeft: '0px',
+              marginRight: '0px',
+             }}>
+              <h1>Bear's Den!</h1>
+            </div>
+
+          </div>
+
+          
+          {/* <h1>{post.frontmatter.title}</h1>
+          <p
+            style={{
+              ...scale(-1 / 5),
+              display: `block`,
+              marginBottom: rhythm(1),
+              marginTop: rhythm(-1),
+            }}
+          >
+            {post.frontmatter.date}
+          </p> */}
+        </figure>
+
+        <Layout location={location} title={siteTitle} isPhoto>
+          <SEO title={post.frontmatter.title} description={post.excerpt} />
+          <MDXRenderer>{post.code.body}</MDXRenderer>
+          <ManifestRenderer manifest={manifest} images={images} />        
+          <hr
+            style={{
+              marginBottom: rhythm(1),
+            }}
+          />
+          <Bio />
+        </Layout>
+      </div>
     )
   }
 }
