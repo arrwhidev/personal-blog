@@ -32,7 +32,7 @@ class Layout extends React.Component {
         </h1>
       )
     } else {
-      header = (
+      header = isPhoto ? null : (
         <h3
           style={{
             fontFamily: `Montserrat, sans-serif`,

@@ -22,56 +22,82 @@ class PhotoPostTemplate extends React.Component {
 
       return (
       <div>
-        <figure style={{
-          width: '100%',
-          height: `100vh`,
-          overflow: 'hidden',
-          margin: 0
-        }}>
-          <img 
-          src="https://exposure.imgix.net/production/posts/68825/cover-photo/cover-1414101129.jpg?w=3600&q=50&sharp=10&fit=crop&fm=pjpg&auto=format"
-          style={{
-            display: 'block',
-            objectFit: 'cover',
+          <header style={{
             width: '100%',
             height: `100vh`,
-          }}></img>
-
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            position: 'absolute',
-            top: '0px',
-            left: '0px',
-            width: '100%',
-            height: `100vh`,
+            overflow: 'hidden',
+            margin: 0
+          }}>
+            <div className="flex" style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                position: 'absolute',
+                top: '0px',
+                left: '0px',
+                width: '100%',
+                height: `100vh`,
+                zIndex: 0,
+                flexDirection: 'column'
             }}>
-            
-            <div style={{ 
-              display: 'block',
-              position: 'relative',
-              textAlign: 'center',
-              marginLeft: '0px',
-              marginRight: '0px',
-             }}>
-              <h1>Bear's Den!</h1>
+
+              <div className="image-container" style={{
+                display: 'block',
+                top: '0px',
+                left: '0px',
+                position: 'absolute',
+              }}>
+                    <img 
+                    src="https://exposure.imgix.net/production/posts/68825/cover-photo/cover-1414101129.jpg?w=3600&q=50&sharp=10&fit=crop&fm=pjpg&auto=format"
+                    style={{
+                      objectFit: 'cover',
+                      width: '100%',
+                      height: `100vh`,
+                      filter: 'brightness(50%)'
+                    }}></img>
+              </div>
+
+              <div className="text-container" style={{
+                display: 'block',
+                position: 'relative',
+                textAlign: 'center',
+                marginLeft: '0px',
+                marginRight: '0px',
+                width: '100%',
+                height: '85vh',
+                zIndex: 5,
+                color: 'white',
+                paddingTop: '25vh'
+              }}>
+                <h1 style={{
+                  fontSize: '3.5rem'
+                }}>{post.frontmatter.title}</h1>
+                <p
+                  style={{
+                    ...scale(-1 / 5),
+                    display: `block`,
+                    marginBottom: rhythm(1),
+                    marginTop: rhythm(-1),
+                    fontSize: '1rem'
+                  }}
+                >
+                  {post.frontmatter.date}
+                </p>
+              </div>
+              <div className="bio-container" style={{
+                display: 'block',
+                position: 'relative',
+                textAlign: 'center',
+                marginLeft: '0px',
+                marginRight: '0px',
+                width: '100%',
+                height: '15vh',
+                zIndex: 5,
+                color: 'white'
+              }}>
+                <Bio />
+              </div>
             </div>
-
-          </div>
-
-          
-          {/* <h1>{post.frontmatter.title}</h1>
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-              marginTop: rhythm(-1),
-            }}
-          >
-            {post.frontmatter.date}
-          </p> */}
-        </figure>
+          </header>
 
         <Layout location={location} title={siteTitle} isPhoto>
           <SEO title={post.frontmatter.title} description={post.excerpt} />
