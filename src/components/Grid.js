@@ -74,149 +74,62 @@ const IMAGE_COMPONENTS = {
     third: ThirdImage,
 }
 
-/**
- export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => <Header data={data} {...props} />}
-  />
-) 
-*/
-
-/**
- query($slug: String!, $absolutePathRegex: String!) {
-                site {
-                  siteMetadata {
-                    title
-                    author
-                  }
-                }
-                images: allFile(
-                  filter: {
-                    absolutePath: { regex: $absolutePathRegex }
-                    extension: { regex: "/(jpg)|(png)|(tif)|(tiff)|(webp)|(jpeg)/" }
-                  }
-                  sort: { fields: name, order: ASC }
-                ) {
-                  edges {
-                    node {
-                      childImageSharp {
-                        fluid(maxWidth: 1600, quality: 90) {
-                          ...GatsbyImageSharpFluid_withWebp
-                        }
-                      }
-                    }
-                  }
-                }
-                mdx(fields: { slug: { eq: $slug } }) {
-                  id
-                  excerpt(pruneLength: 160)
-                  frontmatter {
-                    title
-                    date(formatString: "MMMM DD, YYYY")
-                  }
-                }
-              }
- */
-
 export default class Grid extends React.Component {
+
     render() {
         return <StaticQuery
             query={graphql`
             query {
                 site {
-                  siteMetadata {
-                    title
-                  }
+                    siteMetadata {
+                        title
+                    }
                 }
                 images: allFile(
-                        filter: {
-                        absolutePath: { regex: $absolutePathRegex }
+                    filter: {
                         extension: { regex: "/(jpg)|(png)|(tif)|(tiff)|(webp)|(jpeg)/" }
-                        }
-                        sort: { fields: name, order: ASC }
-                    ) {
-                        edges {
+                    }
+                    sort: { fields: name, order: ASC }
+                ) {
+                    edges {
                         node {
+                            absolutePath
                             childImageSharp {
-                            fluid(maxWidth: 1600, quality: 90) {
-                                ...GatsbyImageSharpFluid_withWebp
+                                fluid(maxWidth: 1600, quality: 90) {
+                                    ...GatsbyImageSharpFluid_withWebp
+                                }
                             }
-                            }
-                        }
                         }
                     }
-              }
+                }
+            }
             `}
+            
             render={data => {
-                console.log(data, this.props)
-                return <p>I AM THE GRID</p>
+                const images = data.images.edges
+                    .filter(node => {
+                        return node.node.absolutePath.includes(this.props.manifest.blog)
+                    }).map(node => node.node.childImageSharp)
+
+                const { manifest } = this.props
+
+                const renderImage = (image, size) => {
+                    const StyledImage = IMAGE_COMPONENTS[size];
+                    return (<StyledImage
+                        key={image.fluid.src}
+                        fluid={image.fluid}
+                    />)
+                }
+
+                const content = manifest.images.map(({name, type}) => {
+                    const img = images.find(image => image.fluid.src.endsWith(name));
+                    return renderImage(img, type)
+                })
+
+                return (
+                    <GridLayout>{ content } </GridLayout>
+                )
             }}
         />
-
-        // console.log('****', this.props);
-
-        // const { images, manifest } = this.props;
-
-        // const renderImage = (image, size) => {
-        //     const StyledImage = IMAGE_COMPONENTS[size];
-        //     return (<StyledImage
-        //         key={image.node.childImageSharp.fluid.src}
-        //         fluid={image.node.childImageSharp.fluid}
-        //     />)
-        // }
-
-        // const content = manifest.images.map(({name, type}) => {
-        //     const img = images.find(({node}) => node.childImageSharp.fluid.src.endsWith(name));
-        //     return renderImage(img, type)
-        // })
-
-        // return (
-        //     <GridLayout>{ content } </GridLayout>
-        // )
     }     
 }
-
-// export const gridQuery = graphql`
-//   query($slug: String!, $absolutePathRegex: String!) {
-//     site {
-//       siteMetadata {
-//         title
-//         author
-//       }
-//     }
-//     images: allFile(
-//       filter: {
-//         absolutePath: { regex: $absolutePathRegex }
-//         extension: { regex: "/(jpg)|(png)|(tif)|(tiff)|(webp)|(jpeg)/" }
-//       }
-//       sort: { fields: name, order: ASC }
-//     ) {
-//       edges {
-//         node {
-//           childImageSharp {
-//             fluid(maxWidth: 1600, quality: 90) {
-//               ...GatsbyImageSharpFluid_withWebp
-//             }
-//           }
-//         }
-//       }
-//     }
-//     mdx(fields: { slug: { eq: $slug } }) {
-//       id
-//       excerpt(pruneLength: 160)
-//       frontmatter {
-//         title
-//         date(formatString: "MMMM DD, YYYY")
-//       }
-//     }
-//   }
-// `

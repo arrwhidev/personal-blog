@@ -1,0 +1,7 @@
+{ 
+    "blog": "bears-den",
+    "images": [
+            { "name": "original-7.jpg", "type": "half" },
+            { "name": "original-7.jpg", "type": "half" }
+    ]
+}
