@@ -68,10 +68,26 @@ const ThirdImage = styled(Img)`
     `}
 `
 
+const TwoThirdsImage = styled(Img)`
+    ${media.giant`
+        grid-column: span 4;
+    `}
+    ${media.desktop`
+        grid-column: span 4;
+    `}
+    ${media.tablet`
+        grid-column: span 1;
+    `}
+    ${media.phone`
+        grid-column: span 1;
+    `}
+`
+
 const IMAGE_COMPONENTS = {
     full: FullImage,
     half: HalfImage,
     third: ThirdImage,
+    twothirds: TwoThirdsImage
 }
 
 export default class Grid extends React.Component {
@@ -106,15 +122,22 @@ export default class Grid extends React.Component {
             `}
             
             render={data => {
+                const { blog } = this.props.manifest;
+                
                 const images = data.images.edges
                     .filter(node => {
-                        return node.node.absolutePath.includes(this.props.manifest.blog)
+                        return node.node.absolutePath.includes(blog)
                     }).map(node => node.node.childImageSharp)
 
                 const { manifest } = this.props
 
                 const renderImage = (image, size) => {
                     const StyledImage = IMAGE_COMPONENTS[size];
+
+                    if (!StyledImage) {
+                        throw new Error(`You made a typo in the manifest - '${size}' is not a valid type!`)
+                    }
+
                     return (<StyledImage
                         key={image.fluid.src}
                         fluid={image.fluid}
