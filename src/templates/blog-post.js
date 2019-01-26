@@ -3,21 +3,36 @@ import { Link, graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 
 import Bio from '../components/Bio'
-import Layout from '../components/Layout'
+import GenericLayout from '../components/GenericLayout'
 import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
 
-class BlogPostTemplate extends React.Component {
+export default class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
     const siteTitle = this.props.data.site.siteMetadata.title
-    const { previous, next } = this.props.pageContext
 
-    return (
+    const header = ( //todo fragment?
       <div>
-        <Layout location={this.props.location} title={siteTitle}>
-          <SEO title={post.frontmatter.title} description={post.excerpt} />
-          <h1>{post.frontmatter.title}</h1>
+        <h3
+          style={{
+            fontFamily: `Montserrat, sans-serif`,
+            marginTop: 0,
+            marginBottom: rhythm(-1),
+          }}
+        >
+          <Link
+            style={{
+              boxShadow: `none`,
+              textDecoration: `none`,
+              color: `inherit`,
+            }}
+            to={`/`}
+          >
+            {siteTitle}
+          </Link>
+        </h3>
+        <h1>{post.frontmatter.title}</h1>
           <p
             style={{
               ...scale(-1 / 5),
@@ -28,6 +43,11 @@ class BlogPostTemplate extends React.Component {
           >
             {post.frontmatter.date}
           </p>
+      </div>
+    )
+
+    return (
+        <GenericLayout header={header} location={this.props.location} title={siteTitle} seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
           <MDXRenderer>{post.code.body}</MDXRenderer>
           <hr
             style={{
@@ -35,37 +55,10 @@ class BlogPostTemplate extends React.Component {
             }}
           />
           <Bio />
-          <ul
-            style={{
-              display: `flex`,
-              flexWrap: `wrap`,
-              justifyContent: `space-between`,
-              listStyle: `none`,
-              padding: 0,
-            }}
-          >
-            <li>
-              {previous && (
-                <Link to={previous.fields.slug} rel="prev">
-                  ← {previous.frontmatter.title}
-                </Link>
-              )}
-            </li>
-            <li>
-              {next && (
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title} →
-                </Link>
-              )}
-            </li>
-          </ul>
-        </Layout>
-        </div>
+        </GenericLayout>
     )
   }
 }
-
-export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query($slug: String!) {
