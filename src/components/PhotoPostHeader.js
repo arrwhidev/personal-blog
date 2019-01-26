@@ -71,7 +71,7 @@ export default class Header extends React.Component {
                 zIndex: 5,
                 color: 'white'
             }}>
-                <Bio />
+                <Bio isPhoto/>
             </div>
         )
     }

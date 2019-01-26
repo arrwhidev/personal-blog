@@ -1,16 +1,15 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-
+import Layout from '../components/Layout'
 import Bio from '../components/Bio'
-import GenericLayout from '../components/GenericLayout'
-import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
 
 export default class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
     const siteTitle = this.props.data.site.siteMetadata.title
+    const { previous, next } = this.props.pageContext
 
     const header = ( //todo fragment?
       <div>
@@ -47,15 +46,37 @@ export default class BlogPostTemplate extends React.Component {
     )
 
     return (
-        <GenericLayout header={header} location={this.props.location} title={siteTitle} seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
-          <MDXRenderer>{post.code.body}</MDXRenderer>
-          <hr
+        <Layout header={header} location={this.props.location} title={siteTitle} seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
+          <div className='hello' style={{
+              paddingBottom: '60px'
+          }}><MDXRenderer >{post.code.body}</MDXRenderer></div>
+          <Bio/>
+          <ul
             style={{
-              marginBottom: rhythm(1),
+              display: `flex`,
+              flexWrap: `wrap`,
+              justifyContent: `space-between`,
+              listStyle: `none`,
+              padding: 0,
+              paddingTop: '10px'
             }}
-          />
-          <Bio />
-        </GenericLayout>
+          >
+            <li>
+              {previous && (
+                <Link to={previous.fields.slug} rel="prev">
+                  ← {previous.frontmatter.title}
+                </Link>
+              )}
+            </li>
+            <li>
+              {next && (
+                <Link to={next.fields.slug} rel="next">
+                  {next.frontmatter.title} →
+                </Link>
+              )}
+            </li>
+          </ul>
+        </Layout>
     )
   }
 }

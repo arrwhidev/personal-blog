@@ -3,23 +3,20 @@ import { StaticQuery, graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import { rhythm } from '../utils/typography'
 
-export default function Bio({ isPhoto }) {
-  const styles = isPhoto ? {} : {
-    display: `flex`,
-    maxWidth: '305px'
-  };
-
-  const text = isPhoto
-    ? 'Photography by'
-    : 'Photography & writing. Personal blog of';
-
+export default function Bio() {
   return (
     <StaticQuery
       query={bioQuery}
       render={data => {
         const { author, social } = data.site.siteMetadata
         return (
-          <div style={styles}>
+          <div
+            style={{
+              // display: `flex`,
+              // marginBottom: rhythm(2.5),
+              // maxWidth: '305px'
+            }}
+          >
             <Image
               fixed={data.avatar.childImageSharp.fixed}
               alt={author}
@@ -31,7 +28,9 @@ export default function Bio({ isPhoto }) {
               }}
             />
             <p>
-              { `${text} ` }
+              Photography & writing.
+              Personal blog of
+              {` `}
               <a href={`https://twitter.com/${social.twitter}`}>
               <strong>{author}</strong>
               .
@@ -45,7 +44,7 @@ export default function Bio({ isPhoto }) {
 }
 
 const bioQuery = graphql`
-  query BioQuery {
+  query BioQuery2 {
     avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
       childImageSharp {
         fixed(width: 50, height: 50) {

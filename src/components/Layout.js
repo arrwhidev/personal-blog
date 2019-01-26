@@ -4,65 +4,25 @@ import { rhythm, scale } from '../utils/typography'
 import styled from 'styled-components'
 import { media } from '../utils/styles';
 import Footer from './Footer'
+import SEO from './seo'
 
-class Layout extends React.Component {
+export default class GenericLayout extends React.Component {
   render() {
-    const { location, title, children, isPhoto } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
-    let header
-
-    if (location.pathname === rootPath) {
-      header = (
-        <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h1>
-      )
-    } else {
-      header = isPhoto ? null : (
-        <h3
-          style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-            marginBottom: rhythm(-1),
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h3>
-      )
-    }
-
+    const { title, children, isIndex, isPhoto, header, seoTitle, seoDescription = '', seoKeywords = [] } = this.props
     const Wrapper = isPhoto ? this.photoLayoutWrapper() : this.normalLayoutWrapper()
 
     return (
       <Wrapper>
-        {header}
+        <header>
+            <SEO
+              title={seoTitle || title}
+              description={seoDescription}
+              keywords={seoKeywords}
+            />
+            {header}
+        </header>
         {children}
-        <hr></hr>
-        <Footer />
+        <Footer/>
       </Wrapper>
     )
   }
@@ -97,5 +57,3 @@ class Layout extends React.Component {
     `
   }
 }
-
-export default Layout

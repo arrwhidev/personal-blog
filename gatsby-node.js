@@ -42,15 +42,15 @@ exports.createPages = ({ graphql, actions }) => {
     const blogs = posts.filter(p => p.node.frontmatter.mode === 'blog')
     const photos = posts.filter(p => p.node.frontmatter.mode === 'photo')
 
-    createPages(blogs, blogPost, createPage, false)
-    createPages(photos, photoPost, createPage, true)
+    createPages(blogs, blogPost, createPage, posts)
+    createPages(photos, photoPost, createPage, posts)
   })
 }
 
-function createPages(posts, component, createPage, isImage) {
+function createPages(posts, component, createPage, allPostsForPagination) {
   posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node
-    const next = index === 0 ? null : posts[index - 1].node
+    const previous = index === allPostsForPagination.length - 1 ? null : allPostsForPagination[index + 1].node
+    const next = index === 0 ? null : allPostsForPagination[index - 1].node
 
     createPage({
       path: post.node.fields.slug,

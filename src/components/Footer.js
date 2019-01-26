@@ -6,7 +6,7 @@ import GithubIcon from '!svg-react-loader!../../static/svg/github.svg?name=Githu
 
 function Icon({ component }) {
     const StyledIcon = styled(component)`
-        width: 20px;
+        width: 22px;
     `
     return <StyledIcon />
 }
@@ -25,16 +25,25 @@ function Anchor({ href, component }) {
 }
 
 export default () => {
+    const StyledFooter = styled.footer`
+        padding-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 33%;
+        text-align: center;
+    `
+
     return <StaticQuery
       query={footerQuery}
       render={data => {
         const { social } = data.site.siteMetadata
         return (
-            <div>
+            <StyledFooter>
+                <hr style={{ width: '100%' }}/>
                 <Anchor component={TwitterIcon} href={`https://twitter.com/${social.twitter}`}/>
                 {` `}
                 <Anchor component={GithubIcon} href={`https://github.com/${social.github}`}/>
-            </div>
+            </StyledFooter>
         )
       }}
     />

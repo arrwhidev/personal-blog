@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-
 import Bio from '../components/Bio'
-import GenericLayout from '../components/GenericLayout'
+import Layout from '../components/Layout'
 import { rhythm, scale } from '../utils/typography'
 
 export default class BlogIndex extends React.Component {
@@ -17,7 +16,7 @@ export default class BlogIndex extends React.Component {
       <div>
         <h1
           style={{
-            ...scale(1.5),
+            ...scale(1.3),
             marginBottom: rhythm(1.5),
             marginTop: 0,
           }}
@@ -38,7 +37,7 @@ export default class BlogIndex extends React.Component {
     )
 
     return (
-      <GenericLayout title={siteTitle} seoKeywords={keywords} header={header}>
+      <Layout isIndex title={siteTitle} seoKeywords={keywords} header={header}>
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -57,7 +56,7 @@ export default class BlogIndex extends React.Component {
             </div>
           )
         })}
-      </GenericLayout>
+      </Layout>
     )
   }
 }

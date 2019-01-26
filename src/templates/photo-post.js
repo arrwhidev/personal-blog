@@ -1,16 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Header from '../components/Header'
+import Header from '../components/PhotoPostHeader'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-import Bio from '../components/Bio'
 import Layout from '../components/Layout'
-import SEO from '../components/seo'
 import { rhythm } from '../utils/typography'
 
 export default class PhotoPostTemplate extends React.Component {
   render() {
     const { data, pageContext, location } = this.props
-    const { slug } = pageContext
     const siteTitle = data.site.siteMetadata.title
     const post = data.mdx
     const node = data.images.edges
@@ -18,24 +15,16 @@ export default class PhotoPostTemplate extends React.Component {
         return edge.node.childImageSharp.fluid.src.endsWith('hero.jpg')
       })
 
+    const header = <Header 
+      date={post.frontmatter.date} 
+      title={post.frontmatter.title} 
+      heroImage={node.node.childImageSharp.fluid}
+    /> 
+
     return (
-      <div>
-        <Header 
-          date={post.frontmatter.date} 
-          title={post.frontmatter.title} 
-          heroImage={node.node.childImageSharp.fluid}
-        />  
-        <Layout location={location} title={siteTitle} isPhoto>
-          <SEO title={post.frontmatter.title} description={post.excerpt} />
+        <Layout header={header} location={location} title={siteTitle} isPhoto seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
           <MDXRenderer>{post.code.body}</MDXRenderer>
-          <hr
-            style={{
-              marginBottom: rhythm(1),
-            }}
-          />
-          <Bio />
         </Layout>
-      </div>
     )
   }
 }
