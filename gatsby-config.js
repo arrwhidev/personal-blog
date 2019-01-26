@@ -124,6 +124,9 @@ module.exports = {
                       title
                       date
                       mode
+                      currentlyListening
+                      keywords
+                      description
                     }
                   }
                 }

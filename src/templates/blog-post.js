@@ -45,9 +45,19 @@ export default class BlogPostTemplate extends React.Component {
       </div>
     )
 
+    function currentlyListening() {
+      const { currentlyListening } = post.frontmatter
+      return !currentlyListening ? null : (
+        <blockquote> 
+          <p>Currently listening to: {currentlyListening}</p>
+        </blockquote>
+      )
+    }
+
     return (
         <Layout header={header} location={this.props.location} title={siteTitle} seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
-          <div className='hello' style={{
+          { currentlyListening() }
+          <div style={{
               paddingBottom: '60px'
           }}><MDXRenderer >{post.code.body}</MDXRenderer></div>
           <Bio/>
@@ -95,6 +105,9 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        currentlyListening
+        keywords
+        description
       }
       code {
         body
