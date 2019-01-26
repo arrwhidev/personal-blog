@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { rhythm, scale } from '../utils/typography'
 import styled from 'styled-components'
 import { media } from '../utils/styles';
+import Footer from './Footer'
 
 class Layout extends React.Component {
   render() {
@@ -54,7 +55,20 @@ class Layout extends React.Component {
       )
     }
 
-    const Wrapper = styled.div`
+    const Wrapper = isPhoto ? this.photoLayoutWrapper() : this.normalLayoutWrapper()
+
+    return (
+      <Wrapper>
+        {header}
+        {children}
+        <hr></hr>
+        <Footer />
+      </Wrapper>
+    )
+  }
+
+  photoLayoutWrapper() {
+    return styled.div`
       margin-left: auto;
       margin-right: auto;
       padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
@@ -72,18 +86,15 @@ class Layout extends React.Component {
           max-width: ${rhythm(24)};
       `}
     `
+  }
 
-    return (
-      <Wrapper>
-        {header}
-        {children}
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </Wrapper>
-    )
+  normalLayoutWrapper() {
+    return styled.div`
+      margin-left: auto;
+      margin-right: auto;
+      padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+      max-width: ${rhythm(24)};
+    `
   }
 }
 

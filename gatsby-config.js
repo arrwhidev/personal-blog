@@ -6,9 +6,18 @@ module.exports = {
     siteUrl: `https://gatsby-starter-blog-mdx-demo.netlify.com/`,
     social: {
       twitter: `arranwhite_`,
+      github: `arrwhidev`,
     },
   },
   plugins: [
+      {
+        resolve: 'gatsby-plugin-react-svg',
+        options: {
+            rule: {
+              include: /svg-icons/
+            }
+        }
+    },
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-transformer-json`,
