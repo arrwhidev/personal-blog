@@ -43,7 +43,8 @@ export default class BlogIndex extends React.Component {
     return (
       <Layout isIndex title={siteTitle} seoKeywords={keywords} header={header}>
         {posts.map(({ node }) => {
-          const icon = node.frontmatter.mode === 'photo' ? 'camera-retro' : 'code';
+          const icon =
+            node.frontmatter.mode === 'photo' ? 'camera-retro' : 'code'
           const title = node.frontmatter.title || node.fields.slug
           return (
             <div key={node.fields.slug}>
@@ -53,10 +54,14 @@ export default class BlogIndex extends React.Component {
                 }}
               >
                 <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                <FontAwesomeIcon icon={icon} style={{
-                  color: '#1d262f',
-                  marginRight: '8px'
-                  }}/>{` ${title}`}
+                  <FontAwesomeIcon
+                    icon={icon}
+                    style={{
+                      color: '#1d262f',
+                      marginRight: '8px',
+                    }}
+                  />
+                  {` ${title}`}
                 </Link>
               </h3>
               <small>{node.frontmatter.date}</small>

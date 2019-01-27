@@ -3,6 +3,7 @@ import Img from 'gatsby-image'
 import styled from 'styled-components'
 import { media } from '../utils/styles'
 import { StaticQuery, graphql } from 'gatsby'
+import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 
 export default class Wide extends React.Component {
   render() {
@@ -44,16 +45,33 @@ export default class Wide extends React.Component {
             .map(node => node.node.childImageSharp)
 
           const img = images.find(image => image.fluid.src.endsWith(name))
-          const WideImage = styled(Img)`
-            padding: 10px;
-            width: 100%;
-            height: 100%;
-            display: block;
-            position: absolute;
-            left: 0;
-          `
 
-          return <WideImage fluid={img.fluid} />
+          return (
+            <div
+              style={{
+                height: '400px',
+              }}
+            >
+              <div
+                className="image-container"
+                style={{
+                  left: '0px',
+                  width: '100%',
+                  position: 'absolute',
+                }}
+              >
+                <Img
+                  fluid={img.fluid}
+                  style={{
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                    position: 'static',
+                  }}
+                />
+              </div>
+            </div>
+          )
         }}
       />
     )
