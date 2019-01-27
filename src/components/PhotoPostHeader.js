@@ -2,6 +2,7 @@ import React from 'react'
 import Bio from './Bio'
 import Img from 'gatsby-image'
 import { rhythm, scale } from '../utils/typography'
+import ArrowIcon from '!svg-react-loader!../../static/svg/arrow.svg?name=ArrowIcon'
 
 export default class Header extends React.Component {
   imageContainer() {
@@ -84,6 +85,33 @@ export default class Header extends React.Component {
     )
   }
 
+  backToHome() {
+    return (
+      <div
+        className="back"
+        style={{
+          position: 'absolute',
+          top: 50,
+          left: 50,
+          width: '40px',
+          height: '40px',
+          zIndex: 10,
+          transform: 'scaleX(-1)',
+        }}
+      >
+        <a href="/" style={{ boxShadow: 'none' }}>
+          <ArrowIcon
+            style={{
+              width: '100%',
+              height: '100%',
+              filter: 'invert(100%)',
+            }}
+          />
+        </a>
+      </div>
+    )
+  }
+
   render() {
     return (
       <header
@@ -94,6 +122,7 @@ export default class Header extends React.Component {
           margin: 0,
         }}
       >
+        {this.backToHome()}
         <div
           className="flex"
           style={{

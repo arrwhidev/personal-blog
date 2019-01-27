@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Images & Words`,
     author: `Arran White`,
-    description: `An extension of the gatsby starter blog, with support for MDX`,
+    description: `Personal blog of Arran White`,
     siteUrl: `https://gatsby-starter-blog-mdx-demo.netlify.com/`,
     social: {
       twitter: `arranwhite_`,
