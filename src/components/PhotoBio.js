@@ -11,11 +11,13 @@ export default function Bio() {
         const { author, social } = data.site.siteMetadata
         return (
           <div
-            style={{
-              // display: `flex`,
-              // marginBottom: rhythm(2.5),
-              // maxWidth: '305px'
-            }}
+            style={
+              {
+                // display: `flex`,
+                // marginBottom: rhythm(2.5),
+                // maxWidth: '305px'
+              }
+            }
           >
             <Image
               fixed={data.avatar.childImageSharp.fixed}
@@ -28,12 +30,10 @@ export default function Bio() {
               }}
             />
             <p>
-              Photography & writing.
-              Personal blog of
+              Photography & writing. Personal blog of
               {` `}
               <a href={`https://twitter.com/${social.twitter}`}>
-              <strong>{author}</strong>
-              .
+                <strong>{author}</strong>.
               </a>
             </p>
           </div>

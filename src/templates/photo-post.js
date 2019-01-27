@@ -10,21 +10,29 @@ export default class PhotoPostTemplate extends React.Component {
     const { data, pageContext, location } = this.props
     const siteTitle = data.site.siteMetadata.title
     const post = data.mdx
-    const node = data.images.edges
-      .find(edge => {
-        return edge.node.childImageSharp.fluid.src.endsWith('hero.jpg')
-      })
+    const node = data.images.edges.find(edge => {
+      return edge.node.childImageSharp.fluid.src.endsWith('hero.jpg')
+    })
 
-    const header = <Header 
-      date={post.frontmatter.date} 
-      title={post.frontmatter.title} 
-      heroImage={node.node.childImageSharp.fluid}
-    /> 
+    const header = (
+      <Header
+        date={post.frontmatter.date}
+        title={post.frontmatter.title}
+        heroImage={node.node.childImageSharp.fluid}
+      />
+    )
 
     return (
-        <Layout header={header} location={location} title={siteTitle} isPhoto seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
-          <MDXRenderer>{post.code.body}</MDXRenderer>
-        </Layout>
+      <Layout
+        header={header}
+        location={location}
+        title={siteTitle}
+        isPhoto
+        seoDescription={post.excerpt}
+        seoTitle={post.frontmatter.title}
+      >
+        <MDXRenderer>{post.code.body}</MDXRenderer>
+      </Layout>
     )
   }
 }

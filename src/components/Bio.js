@@ -4,14 +4,16 @@ import Image from 'gatsby-image'
 import { rhythm } from '../utils/typography'
 
 export default function Bio({ isPhoto }) {
-  const styles = isPhoto ? {} : {
-    display: `flex`,
-    maxWidth: '305px'
-  };
+  const styles = isPhoto
+    ? {}
+    : {
+        display: `flex`,
+        maxWidth: '305px',
+      }
 
   const text = isPhoto
     ? 'Photography by'
-    : 'Photography & writing. Personal blog of';
+    : 'Photography & writing. Personal blog of'
 
   return (
     <StaticQuery
@@ -31,10 +33,9 @@ export default function Bio({ isPhoto }) {
               }}
             />
             <p>
-              { `${text} ` }
+              {`${text} `}
               <a href={`https://twitter.com/${social.twitter}`}>
-              <strong>{author}</strong>
-              .
+                <strong>{author}</strong>.
               </a>
             </p>
           </div>

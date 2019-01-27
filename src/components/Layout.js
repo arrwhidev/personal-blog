@@ -2,27 +2,37 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { rhythm, scale } from '../utils/typography'
 import styled from 'styled-components'
-import { media } from '../utils/styles';
+import { media } from '../utils/styles'
 import Footer from './Footer'
 import SEO from './seo'
 
 export default class GenericLayout extends React.Component {
   render() {
-    const { title, children, isPhoto, header, seoTitle, seoDescription = '', seoKeywords = [] } = this.props
-    const Wrapper = isPhoto ? this.photoLayoutWrapper() : this.normalLayoutWrapper()
+    const {
+      title,
+      children,
+      isPhoto,
+      header,
+      seoTitle,
+      seoDescription = '',
+      seoKeywords = [],
+    } = this.props
+    const Wrapper = isPhoto
+      ? this.photoLayoutWrapper()
+      : this.normalLayoutWrapper()
 
     return (
       <Wrapper>
         <header>
-            <SEO
-              title={seoTitle || title}
-              description={seoDescription}
-              keywords={seoKeywords}
-            />
-            {header}
+          <SEO
+            title={seoTitle || title}
+            description={seoDescription}
+            keywords={seoKeywords}
+          />
+          {header}
         </header>
         {children}
-        <Footer/>
+        <Footer />
       </Wrapper>
     )
   }

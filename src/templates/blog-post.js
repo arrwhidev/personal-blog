@@ -32,61 +32,71 @@ export default class BlogPostTemplate extends React.Component {
           </Link>
         </h3>
         <h1>{post.frontmatter.title}</h1>
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-              marginTop: rhythm(-1),
-            }}
-          >
-            {post.frontmatter.date}
-          </p>
+        <p
+          style={{
+            ...scale(-1 / 5),
+            display: `block`,
+            marginBottom: rhythm(1),
+            marginTop: rhythm(-1),
+          }}
+        >
+          {post.frontmatter.date}
+        </p>
       </div>
     )
 
     function currentlyListening() {
       const { currentlyListening } = post.frontmatter
       return !currentlyListening ? null : (
-        <blockquote> 
+        <blockquote>
           <p>Currently listening to: {currentlyListening}</p>
         </blockquote>
       )
     }
 
     return (
-        <Layout header={header} location={this.props.location} title={siteTitle} seoDescription={post.excerpt} seoTitle={post.frontmatter.title}>
-          { currentlyListening() }
-          <div style={{
-              paddingBottom: '60px'
-          }}><MDXRenderer >{post.code.body}</MDXRenderer></div>
-          <Bio/>
-          <ul
-            style={{
-              display: `flex`,
-              flexWrap: `wrap`,
-              justifyContent: `space-between`,
-              listStyle: `none`,
-              padding: 0,
-              paddingTop: '10px'
-            }}
-          >
-            <li>
-              {previous && (
-                <Link to={previous.fields.slug} rel="prev">
-                  ← {previous.frontmatter.title}
-                </Link>
-              )}
-            </li>
-            <li>
-              {next && (
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title} →
-                </Link>
-              )}
-            </li>
-          </ul>
-        </Layout>
+      <Layout
+        header={header}
+        location={this.props.location}
+        title={siteTitle}
+        seoDescription={post.excerpt}
+        seoTitle={post.frontmatter.title}
+      >
+        {currentlyListening()}
+        <div
+          style={{
+            paddingBottom: '60px',
+          }}
+        >
+          <MDXRenderer>{post.code.body}</MDXRenderer>
+        </div>
+        <Bio />
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+            paddingTop: '10px',
+          }}
+        >
+          <li>
+            {previous && (
+              <Link to={previous.fields.slug} rel="prev">
+                ← {previous.frontmatter.title}
+              </Link>
+            )}
+          </li>
+          <li>
+            {next && (
+              <Link to={next.fields.slug} rel="next">
+                {next.frontmatter.title} →
+              </Link>
+            )}
+          </li>
+        </ul>
+      </Layout>
     )
   }
 }

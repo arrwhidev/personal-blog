@@ -9,9 +9,7 @@ export default class BlogIndex extends React.Component {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMdx.edges
-    const keywords = [
-      [`blog`, `development`, `javascript`, `photography`]
-    ]
+    const keywords = [[`blog`, `development`, `javascript`, `photography`]]
     const header = (
       <div>
         <h1
