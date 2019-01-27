@@ -49,28 +49,18 @@ export default class Wide extends React.Component {
           return (
             <div
               style={{
-                height: '400px',
-              }}
-            >
-              <div
-                className="image-container"
-                style={{
-                  left: '0px',
-                  width: '100%',
-                  position: 'absolute',
-                }}
-              >
-                <Img
-                  fluid={img.fluid}
-                  style={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                    position: 'static',
-                  }}
-                />
-              </div>
-            </div>
+                  height: '400px'
+              }}>
+                  <Img
+                    fluid={img.fluid}
+                    style={{
+                      left: '0px',
+                      objectFit: 'cover',
+                      width: '100%',
+                      position: 'absolute',
+                    }}
+                  />
+            </div> 
           )
         }}
       />
