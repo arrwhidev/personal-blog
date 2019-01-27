@@ -8,7 +8,7 @@ import SEO from './seo'
 
 export default class GenericLayout extends React.Component {
   render() {
-    const { title, children, isIndex, isPhoto, header, seoTitle, seoDescription = '', seoKeywords = [] } = this.props
+    const { title, children, isPhoto, header, seoTitle, seoDescription = '', seoKeywords = [] } = this.props
     const Wrapper = isPhoto ? this.photoLayoutWrapper() : this.normalLayoutWrapper()
 
     return (
