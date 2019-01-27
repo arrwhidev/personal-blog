@@ -15,7 +15,7 @@ export default class BlogIndex extends React.Component {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMdx.edges
-    const keywords = [[`blog`, `development`, `javascript`, `photography`]]
+    const keywords = [`blog`, `development`, `javascript`, `photography`]
     const header = (
       <div>
         <h1
@@ -41,7 +41,7 @@ export default class BlogIndex extends React.Component {
     )
 
     return (
-      <Layout isIndex title={siteTitle} seoKeywords={keywords} header={header}>
+      <Layout title={siteTitle} seoKeywords={keywords} header={header} seoDescription={"Personal blog of Arran White. Photography, code and writing. Images & Words."}>
         {posts.map(({ node }) => {
           const icon =
             node.frontmatter.mode === 'photo' ? 'camera-retro' : 'code'

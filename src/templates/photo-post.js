@@ -30,6 +30,7 @@ export default class PhotoPostTemplate extends React.Component {
         isPhoto
         seoDescription={post.excerpt}
         seoTitle={post.frontmatter.title}
+        seoKeywords={post.frontmatter.keywords}
       >
         <MDXRenderer>{post.code.body}</MDXRenderer>
       </Layout>
@@ -68,6 +69,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        keywords
       }
       code {
         body

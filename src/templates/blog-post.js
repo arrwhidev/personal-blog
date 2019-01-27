@@ -61,6 +61,7 @@ export default class BlogPostTemplate extends React.Component {
         title={siteTitle}
         seoDescription={post.excerpt}
         seoTitle={post.frontmatter.title}
+        seoKeywords={post.frontmatter.keywords}
       >
         {currentlyListening()}
         <div

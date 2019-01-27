@@ -123,8 +123,6 @@ export default class Grid extends React.Component {
         render={data => {
           const { blog } = this.props.manifest
 
-          console.log(this.props)
-
           const images = data.images.edges
             .filter(node => {
               return node.node.absolutePath.includes(blog)
