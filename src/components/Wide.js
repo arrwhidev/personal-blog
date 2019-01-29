@@ -47,20 +47,14 @@ export default class Wide extends React.Component {
           const img = images.find(image => image.fluid.src.endsWith(name))
 
           return (
-            <div
+            <Img
+              fluid={img.fluid}
               style={{
-                  height: '400px'
-              }}>
-                  <Img
-                    fluid={img.fluid}
-                    style={{
-                      left: '0px',
-                      objectFit: 'cover',
-                      width: '100%',
-                      position: 'absolute',
-                    }}
-                  />
-            </div> 
+                left: '0px',
+                objectFit: 'cover',
+                width: '100%',
+              }}
+            />
           )
         }}
       />

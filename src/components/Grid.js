@@ -3,6 +3,7 @@ import Img from 'gatsby-image'
 import styled from 'styled-components'
 import { media } from '../utils/styles'
 import { StaticQuery, graphql } from 'gatsby'
+import { rhythm } from '../utils/typography'
 
 const GridLayout = styled.div`
     display: grid;
@@ -148,9 +149,35 @@ export default class Grid extends React.Component {
             return renderImage(img, type)
           })
 
-          return <GridLayout>{content} </GridLayout>
+          const Wrapper = this.photoLayoutWrapper();
+          return (
+            <Wrapper>
+                <GridLayout>{content}</GridLayout>
+            </Wrapper>
+          )
         }}
       />
     )
+  }
+
+  photoLayoutWrapper() {
+    return styled.div`
+      margin-left: auto;
+      margin-right: auto;
+      padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+
+      ${media.giant`
+          max-width: ${rhythm(48)};
+      `}
+      ${media.desktop`
+          max-width: ${rhythm(28)};
+      `}
+      ${media.tablet`
+          max-width: ${rhythm(24)};
+      `}
+      ${media.phone`
+          max-width: ${rhythm(24)};
+      `}
+    `
   }
 }

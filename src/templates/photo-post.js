@@ -3,7 +3,6 @@ import { graphql } from 'gatsby'
 import Header from '../components/PhotoPostHeader'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 import Layout from '../components/Layout'
-import { rhythm } from '../utils/typography'
 
 export default class PhotoPostTemplate extends React.Component {
   render() {
