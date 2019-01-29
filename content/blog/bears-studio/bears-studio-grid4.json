@@ -9,23 +9,6 @@
             { "name": "original-49.jpg", "type": "twothirds" },
             { "name": "original-50.jpg", "type": "third" },
             { "name": "original-52.jpg", "type": "third" },
-            { "name": "original-51.jpg", "type": "twothirds" },
-            { "name": "original-53.jpg", "type": "full" },
-            { "name": "original-54.jpg", "type": "full" },
-            { "name": "original-55.jpg", "type": "half" },
-            { "name": "original-56.jpg", "type": "half" },
-            { "name": "original-57.jpg", "type": "half" },
-            { "name": "original-58.jpg", "type": "half" },
-            { "name": "original-59.jpg", "type": "half" },
-            { "name": "original-60.jpg", "type": "half" },
-            { "name": "original-61.jpg", "type": "twothirds" },
-            { "name": "original-62.jpg", "type": "third" },
-            { "name": "original-63.jpg", "type": "half" },
-            { "name": "original-64.jpg", "type": "half" },
-            { "name": "original-65.jpg", "type": "full" },
-            { "name": "original-66.jpg", "type": "half" },
-            { "name": "original-67.jpg", "type": "half" },
-            { "name": "original-68.jpg", "type": "half" },
-            { "name": "original-69.jpg", "type": "half" }
+            { "name": "original-51.jpg", "type": "twothirds" }
     ]
 }
