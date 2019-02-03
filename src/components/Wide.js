@@ -53,6 +53,7 @@ export default class Wide extends React.Component {
                 left: '0px',
                 objectFit: 'cover',
                 width: '100%',
+                marginBottom: '50px'
               }}
             />
           )
