@@ -1,9 +1,0 @@
-{ 
-    "blog": "bears-studio",
-    "images": [
-            { "name": "original-37.jpg", "type": "full" },
-            { "name": "original-38.jpg", "type": "full" },
-            { "name": "original-39.jpg", "type": "twothirds" },
-            { "name": "original-40.jpg", "type": "third" }
-    ]
-}
