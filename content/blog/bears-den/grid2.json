@@ -1,0 +1,13 @@
+{ 
+    "blog": "bears-den",
+    "images": [
+            { "name": "original-11.jpg", "type": "full" },
+            { "name": "original-12.jpg", "type": "full" },
+            { "name": "original-13.jpg", "type": "full" },
+            { "name": "original-14.jpg", "type": "full" },
+            { "name": "original-15.jpg", "type": "third" },
+            { "name": "original-16.jpg", "type": "third" },
+            { "name": "original-17.jpg", "type": "third" },
+            { "name": "original-18.jpg", "type": "full" }
+    ]
+}
