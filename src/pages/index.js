@@ -59,6 +59,7 @@ export default class BlogIndex extends React.Component {
                     style={{
                       color: '#1d262f',
                       marginRight: '8px',
+                      height: '27px'
                     }}
                   />
                   {` ${title}`}
