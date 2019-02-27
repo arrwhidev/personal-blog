@@ -28,5 +28,7 @@ export default ({ text, onClick }) => {
     }
   `
 
-  return <StyledButton onClick={onClick}>{text}</StyledButton>
+  return <div className="main-content">
+      <StyledButton onClick={onClick}>{text}</StyledButton>
+  </div>
 }

@@ -3,13 +3,18 @@ import { StaticQuery, graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import { rhythm } from '../utils/typography'
 
-export default function Bio({ isPhoto }) {
+export default function Bio({ isPhoto, className='' }) {
   const styles = isPhoto
-    ? {}
+    ? {} 
     : {
         display: `flex`,
-        maxWidth: '305px',
-      }
+    }
+  
+  const textStyles = isPhoto
+    ? {} 
+    : {
+        maxWidth: '260px'
+    }
 
   const text = isPhoto
     ? 'Photography by'
@@ -21,7 +26,7 @@ export default function Bio({ isPhoto }) {
       render={data => {
         const { author, social } = data.site.siteMetadata
         return (
-          <div style={styles}>
+          <div style={styles} className={className}>
             <Image
               fixed={data.avatar.childImageSharp.fixed}
               alt={author}
@@ -32,7 +37,7 @@ export default function Bio({ isPhoto }) {
                 borderRadius: `100%`,
               }}
             />
-            <p>
+            <p style={textStyles}>
               {`${text} `}
               <a href={`https://twitter.com/${social.twitter}`}>
                 <strong>{author}</strong>.

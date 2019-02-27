@@ -24,12 +24,11 @@ function Anchor({ href, component }) {
   )
 }
 
-export default () => {
+export default ({className}) => {
   const StyledFooter = styled.footer`
     padding-top: 40px;
     margin-left: auto;
     margin-right: auto;
-    width: 33%;
     text-align: center;
   `
 
@@ -39,8 +38,8 @@ export default () => {
       render={data => {
         const { social } = data.site.siteMetadata
         return (
-          <StyledFooter>
-            <hr style={{ width: '100%' }} />
+          <StyledFooter className={className}>
+            <hr style={{ width: '33%', marginRight: 'auto', marginLeft: 'auto' }} />
             <Anchor
               component={TwitterIcon}
               href={`https://twitter.com/${social.twitter}`}

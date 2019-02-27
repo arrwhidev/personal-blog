@@ -23,7 +23,7 @@ export default class GenericLayout extends React.Component {
 
     return (
       <Wrapper>
-        <header>
+        <header className="main-content">
           <SEO
             title={seoTitle || title}
             description={seoDescription}
@@ -32,7 +32,7 @@ export default class GenericLayout extends React.Component {
           {header}
         </header>
         {children}
-        <Footer />
+        <Footer className="main-content" />
       </Wrapper>
     )
   }
@@ -63,10 +63,41 @@ export default class GenericLayout extends React.Component {
 
   normalLayoutWrapper() {
     return styled.div`
-      margin-left: auto;
-      margin-right: auto;
       padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
-      max-width: ${rhythm(24)};
+
+      .main-content {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: ${rhythm(3 / 4)};
+        padding-right: ${rhythm(3 / 4)};
+        max-width: ${rhythm(24)};
+      }
+
+      .canvas-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+
+        ${media.giant`
+            max-width: ${rhythm(42)};
+            padding-top: 30px;
+            padding-bottom: 30px;
+        `}
+        ${media.desktop`
+            max-width: ${rhythm(36)};
+            padding-top: 30px;
+            padding-bottom: 30px;
+        `}
+        ${media.tablet`
+            max-width: ${rhythm(24)};
+            padding-left: ${rhythm(3 / 4)};
+            padding-right: ${rhythm(3 / 4)};
+        `}
+        ${media.phone`
+            max-width: ${rhythm(24)};
+            padding-left: ${rhythm(3 / 4)};
+            padding-right: ${rhythm(3 / 4)};
+        `}
+      }
     `
   }
 }

@@ -47,7 +47,7 @@ export default class BlogIndex extends React.Component {
             node.frontmatter.mode === 'photo' ? 'camera-retro' : 'code'
           const title = node.frontmatter.title || node.fields.slug
           return (
-            <div key={node.fields.slug}>
+            <div key={node.fields.slug} className="main-content">
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),

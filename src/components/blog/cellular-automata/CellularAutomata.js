@@ -17,7 +17,7 @@ export default class CellularAutomata extends React.Component {
   }
 
   handleOnLoad = e => {
-    this.w = wolfram('canvas', '#00bcd4')
+    this.w = wolfram('canvas-cellular-automata', '#00bcd4')
   }
 
   render() {
@@ -26,13 +26,13 @@ export default class CellularAutomata extends React.Component {
     }
 
     return (
-      <div className="application">
+      <div className="canvas-wrapper">
         <Helmet
           script={[{ src: SCRIPT_SRC }]}
           onChangeClientState={this.handleScriptInject}
         />
         <canvas
-          id="canvas"
+          id="canvas-cellular-automata"
           width="800"
           height="320"
           style={{ width: '100%' }}

@@ -48,7 +48,7 @@ export default class BlogPostTemplate extends React.Component {
     function currentlyListening() {
       const { currentlyListening } = post.frontmatter
       return !currentlyListening ? null : (
-        <blockquote>
+        <blockquote className="main-content">
           <p>Currently listening to: {currentlyListening}</p>
         </blockquote>
       )
@@ -71,9 +71,10 @@ export default class BlogPostTemplate extends React.Component {
         >
           <MDXRenderer>{post.code.body}</MDXRenderer>
         </div>
-        <hr />
-        <Bio />
+        <hr className="main-content"/>
+        <Bio className="main-content"/>
         <ul
+          className="main-content"
           style={{
             display: `flex`,
             flexWrap: `wrap`,
