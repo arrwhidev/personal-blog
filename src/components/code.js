@@ -26,7 +26,10 @@ export const Code = ({ codeString, language, ...props }) => {
         theme={theme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={`${className} main-content`} style={{ ...style, ...pre_styles }}>
+          <pre
+            className={`${className} main-content`}
+            style={{ ...style, ...pre_styles }}
+          >
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>
                 {line.map((token, key) => (

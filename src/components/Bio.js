@@ -3,22 +3,22 @@ import { StaticQuery, graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import { rhythm } from '../utils/typography'
 
-export default function Bio({ isPhoto, className='' }) {
+export default function Bio({ isPhoto, className = '' }) {
   const styles = isPhoto
-    ? {} 
+    ? {}
     : {
         display: `flex`,
-    }
-  
+      }
+
   const textStyles = isPhoto
-    ? {} 
+    ? {}
     : {
-        maxWidth: '260px'
-    }
+        maxWidth: '240px',
+      }
 
   const text = isPhoto
     ? 'Photography by'
-    : 'Photography & writing. Personal blog of'
+    : 'Code & photography. Personal blog of'
 
   return (
     <StaticQuery

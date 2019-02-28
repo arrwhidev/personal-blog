@@ -71,8 +71,8 @@ export default class BlogPostTemplate extends React.Component {
         >
           <MDXRenderer>{post.code.body}</MDXRenderer>
         </div>
-        <hr className="main-content"/>
-        <Bio className="main-content"/>
+        <hr className="main-content" />
+        <Bio className="main-content" />
         <ul
           className="main-content"
           style={{

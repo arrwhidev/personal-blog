@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Images & Words`,
+    title: `#! arran.dev`,
     author: `Arran White`,
     description: `Personal blog of Arran White`,
     siteUrl: `https://gatsby-starter-blog-mdx-demo.netlify.com/`,

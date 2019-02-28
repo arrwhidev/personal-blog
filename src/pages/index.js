@@ -41,7 +41,12 @@ export default class BlogIndex extends React.Component {
     )
 
     return (
-      <Layout title={siteTitle} seoKeywords={keywords} header={header} seoDescription={"Personal blog of Arran White. Photography, code and writing. Images & Words."}>
+      <Layout
+        title={siteTitle}
+        seoKeywords={keywords}
+        header={header}
+        seoDescription={'Personal blog of Arran White. Code & photography.'}
+      >
         {posts.map(({ node }) => {
           const icon =
             node.frontmatter.mode === 'photo' ? 'camera-retro' : 'code'
@@ -59,7 +64,7 @@ export default class BlogIndex extends React.Component {
                     style={{
                       color: '#1d262f',
                       marginRight: '8px',
-                      height: '27px'
+                      height: '27px',
                     }}
                   />
                   {` ${title}`}

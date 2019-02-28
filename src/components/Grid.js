@@ -149,10 +149,10 @@ export default class Grid extends React.Component {
             return renderImage(img, type)
           })
 
-          const Wrapper = this.photoLayoutWrapper();
+          const Wrapper = this.photoLayoutWrapper()
           return (
             <Wrapper>
-                <GridLayout>{content}</GridLayout>
+              <GridLayout>{content}</GridLayout>
             </Wrapper>
           )
         }}

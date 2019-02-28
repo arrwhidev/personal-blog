@@ -10,7 +10,7 @@ function SEO({ description, lang, meta, keywords, title }) {
       render={data => {
         const metaDescription =
           description || data.site.siteMetadata.description
-        
+
         let titleTemplate = `%s | ${data.site.siteMetadata.title}`
         if (title === data.site.siteMetadata.title) {
           titleTemplate = title

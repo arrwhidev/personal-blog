@@ -120,7 +120,7 @@ export default class Header extends React.Component {
           height: `100vh`,
           overflow: 'hidden',
           margin: 0,
-          marginBottom: '80px'
+          marginBottom: '80px',
         }}
       >
         {this.backToHome()}
