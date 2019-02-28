@@ -70,7 +70,7 @@ export default class BlogIndex extends React.Component {
                 </Link>
               </h3>
               <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+              <p dangerouslySetInnerHTML={{ __html: node.frontmatter.description || node.excerpt }} />
             </div>
           )
         })}
@@ -97,6 +97,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             mode
+            description
           }
         }
       }
