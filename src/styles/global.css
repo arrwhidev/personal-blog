@@ -1,7 +1,5 @@
 html {
     background-color: white;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 a {
@@ -10,4 +8,8 @@ a {
 
 button {
     background-color: #5d8cc0
+}
+
+.canvas-container {
+    border-radius: '5px',
 }

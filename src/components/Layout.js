@@ -41,24 +41,12 @@ export default class GenericLayout extends React.Component {
     return styled.div`
       padding-bottom: ${rhythm(1.5)};
 
-      p, h1 {
+      .main-content {
         margin-left: auto;
         margin-right: auto;
         padding-left: ${rhythm(3 / 4)};
         padding-right: ${rhythm(3 / 4)};
-        
-        ${media.giant`
-            max-width: ${rhythm(28)};
-        `}
-        ${media.desktop`
-            max-width: ${rhythm(28)};
-        `}
-        ${media.tablet`
-            max-width: ${rhythm(24)};
-        `}
-        ${media.phone`
-            max-width: ${rhythm(24)};
-        `}
+        max-width: ${rhythm(24)};
       }
     `
   }

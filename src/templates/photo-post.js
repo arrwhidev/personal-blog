@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import PostFooter from '../components/PostFooter'
 import Header from '../components/PhotoPostHeader'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 import Layout from '../components/Layout'
@@ -7,6 +8,7 @@ import Layout from '../components/Layout'
 export default class PhotoPostTemplate extends React.Component {
   render() {
     const { data, pageContext, location } = this.props
+    const { previous, next } = pageContext
     const siteTitle = data.site.siteMetadata.title
     const post = data.mdx
     const node = data.images.edges.find(edge => {
@@ -32,6 +34,7 @@ export default class PhotoPostTemplate extends React.Component {
         seoKeywords={post.frontmatter.keywords}
       >
         <MDXRenderer>{post.code.body}</MDXRenderer>
+        <PostFooter next={next} previous={previous} />
       </Layout>
     )
   }

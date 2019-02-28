@@ -31,12 +31,14 @@ export default class CellularAutomata extends React.Component {
           script={[{ src: SCRIPT_SRC }]}
           onChangeClientState={this.handleScriptInject}
         />
-        <canvas
-          id="canvas-cellular-automata"
-          width="800"
-          height="320"
-          style={{ width: '100%' }}
-        />
+        <div className="canvas-container">
+            <canvas
+                id="canvas-cellular-automata"
+                width="800"
+                height="320"
+                style={{ width: '100%' }}
+            />
+        </div>
       </div>
     )
   }

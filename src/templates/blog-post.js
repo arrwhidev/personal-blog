@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 import Layout from '../components/Layout'
-import Bio from '../components/Bio'
+import PostFooter from '../components/PostFooter'
 import { rhythm, scale } from '../utils/typography'
 
 export default class BlogPostTemplate extends React.Component {
@@ -67,35 +67,7 @@ export default class BlogPostTemplate extends React.Component {
         <div>
             <MDXRenderer>{post.code.body}</MDXRenderer>
         </div>
-        <div className="main-content">
-            <hr style={{ width: '100%' }} />
-        </div>
-        <Bio className="main-content" />
-        <div className="main-content">
-            <ul style={{
-                    display: `flex`,
-                    flexWrap: `wrap`,
-                    justifyContent: `space-between`,
-                    listStyle: `none`,
-                    padding: 0,
-                    paddingTop: '10px',
-            }}>
-                <li>
-                    {previous && (
-                    <Link to={previous.fields.slug} rel="prev">
-                        ← {previous.frontmatter.title}
-                    </Link>
-                    )}
-                </li>
-                <li>
-                    {next && (
-                    <Link to={next.fields.slug} rel="next">
-                        {next.frontmatter.title} →
-                    </Link>
-                    )}
-                </li>
-            </ul>
-        </div>
+        <PostFooter next={next} previous={previous} />
       </Layout>
     )
   }
