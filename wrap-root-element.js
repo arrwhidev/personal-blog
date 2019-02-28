@@ -21,6 +21,8 @@ const components = {
   h1: props => <h1 className="main-content" {...props}></h1>,
   h2: props => <h2 className="main-content" {...props}></h2>,
   h3: props => <h3 className="main-content" {...props}></h3>,
+  ul: props => <ul style={{ paddingLeft:'30px' }} className="main-content" {...props}></ul>,
+  li: props => <li style={{ marginBottom: 0 }} {...props}></li>,
   button: props => <div className="main-content"><button {...props}></button></div>,
   blockquote: props => <blockquote className="main-content" {...props}></blockquote>,
 }

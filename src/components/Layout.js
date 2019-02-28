@@ -63,7 +63,8 @@ export default class GenericLayout extends React.Component {
 
   normalLayoutWrapper() {
     return styled.div`
-      padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+      padding-top: ${rhythm(1.5)};
+      padding-bottom: ${rhythm(1.5)};
 
       .main-content {
         margin-left: auto;
