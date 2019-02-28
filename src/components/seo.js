@@ -16,8 +16,6 @@ function SEO({ description, lang, meta, keywords, title }) {
           titleTemplate = title
         }
 
-        console.log(description, keywords)
-
         return (
           <Helmet
             htmlAttributes={{

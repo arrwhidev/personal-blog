@@ -39,6 +39,8 @@ export default class GenericLayout extends React.Component {
 
   photoLayoutWrapper() {
     return styled.div`
+      padding-bottom: ${rhythm(1.5)};
+
       p, h1 {
         margin-left: auto;
         margin-right: auto;
