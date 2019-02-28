@@ -12,6 +12,7 @@ export default class GenericLayout extends React.Component {
       title,
       children,
       isPhoto,
+      isFull,
       header,
       seoTitle,
       seoDescription = '',
@@ -19,7 +20,9 @@ export default class GenericLayout extends React.Component {
     } = this.props
     const Wrapper = isPhoto
       ? this.photoLayoutWrapper()
-      : this.normalLayoutWrapper()
+      : isFull 
+        ? this.fullLayoutWrapper()
+        : this.normalLayoutWrapper()
 
     return (
       <Wrapper>
@@ -88,6 +91,22 @@ export default class GenericLayout extends React.Component {
             padding-left: ${rhythm(3 / 4)};
             padding-right: ${rhythm(3 / 4)};
         `}
+      }
+    `
+  }
+
+  fullLayoutWrapper() {
+    return styled.div`
+      margin-top: ${rhythm(1.5)};
+      
+      .main-content {
+        margin-left: ${rhythm(2.2)};
+        max-width: ${rhythm(14)};
+      }
+
+      p, h1, h2, li, hr, a {
+        -webkit-filter: invert(100%);
+        filter: invert(100%);
       }
     `
   }

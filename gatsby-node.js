@@ -1,11 +1,13 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const COMPONENTS = {
+    'blog': path.resolve(`./src/templates/blog-post.js`),
+    'full': path.resolve(`./src/templates/full-post.js`),
+    'photo': path.resolve(`./src/templates/photo-post.js`)
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-  const photoPost = path.resolve(`./src/templates/photo-post.js`)
-
   return graphql(
     `
       {
@@ -37,24 +39,19 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    // Create blog posts pages.
     const posts = result.data.allMdx.edges;
-    const blogs = posts.filter(p => p.node.frontmatter.mode === 'blog')
-    const photos = posts.filter(p => p.node.frontmatter.mode === 'photo')
-
-    createPages(blogs, blogPost, createPage, posts)
-    createPages(photos, photoPost, createPage, posts)
+    createPages(posts, createPage);
   })
 }
 
-function createPages(posts, component, createPage, allPostsForPagination) {
+function createPages(posts, createPage) {
   posts.forEach((post, index) => {
-    const previous = index === allPostsForPagination.length - 1 ? null : allPostsForPagination[index + 1].node
-    const next = index === 0 ? null : allPostsForPagination[index - 1].node
+    const previous = index === posts.length - 1 ? null : posts[index + 1].node
+    const next = index === 0 ? null : posts[index - 1].node
 
     createPage({
       path: post.node.fields.slug,
-      component,
+      component: COMPONENTS[post.node.frontmatter.mode],
       context: {
         // Pass the current directory of the project as regex in context so that the GraphQL query can filter by it
         absolutePathRegex: `/^${path.dirname(post.node.fileAbsolutePath)}/`,

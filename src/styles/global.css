@@ -10,6 +10,10 @@ button {
     background-color: #5d8cc0
 }
 
-.canvas-container {
-    border-radius: '5px',
+li {
+    margin: 0;
+}
+
+input {
+    padding: 0;
 }

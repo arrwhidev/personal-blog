@@ -1,12 +1,12 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-const CANVAS_SCRIPT_SRC =
-  'https://cdn.jsdelivr.net/gh/arrwhidev/canvas-game-loop@RELEASE/v1.0/canvas.js'
-const ASTEROIDS_SCRIPT_SRC =
-  'https://cdn.jsdelivr.net/gh/arrwhidev/asteroids@RELEASE/v0.6/dist/bundle.js'
+const GUI_SCRIPTS_SRC = 
+    'https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.4/dat.gui.min.js'
+const PARTICLES_SCRIPT_SRC =
+    'https://cdn.jsdelivr.net/gh/arrwhidev/particles@012053ad1e71574541e26b0ca1969edf9202a659/dist/bundle.js'
 
-export default class Asteroids extends React.Component {
+export default class Particles extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -21,19 +21,13 @@ export default class Asteroids extends React.Component {
 
     this.updateCanvasSize = () => {
       const { w, h } = this.getCanvasDimensions()
-      const canvas = document.getElementById('asteroids-canvas')
-      console.log('setting canvas size', w, h)
+      const canvas = document.getElementById('canvas')
       canvas.width = w
       canvas.height = h
     }
 
     // Ensure that the canvas dimensions are updated when window is resized.
     window.addEventListener('resize', this.updateCanvasSize, false)
-    this.updateCanvasSize();
-  }
-
-  componentWillUnmount() {
-      window.removeEventListener('resize', this.updateCanvasSize)
   }
 
   handleScriptInject = (_, { scriptTags }) => {
@@ -44,6 +38,10 @@ export default class Asteroids extends React.Component {
       })
     }
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateCanvasSize)
+}
 
   handleOnLoad = (id, e) => {
     console.log('handleOnLoad', id)
@@ -59,24 +57,26 @@ export default class Asteroids extends React.Component {
   }
 
   render() {
+    const { w, h } = this.getCanvasDimensions()
+
     return (
       <div
         className="application"
         style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          zIndex: -1,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            zIndex: -1,
         }}
       >
         <Helmet
           script={[
-            { src: CANVAS_SCRIPT_SRC, id: 'canvas_script' },
-            { src: ASTEROIDS_SCRIPT_SRC, id: 'asteroids_script' },
+            { src: GUI_SCRIPTS_SRC, id: 'gui_script' },
+            { src: PARTICLES_SCRIPT_SRC, id: 'particles_script' }
           ]}
           onChangeClientState={this.handleScriptInject}
         />
-        <canvas id="asteroids-canvas" />
+        <canvas id="canvas" style={{ display: 'block', backgroundColor: 'white' }} width={w} height={h}></canvas>
       </div>
     )
   }
