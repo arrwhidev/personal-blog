@@ -3,7 +3,7 @@ module.exports = {
     title: `#! arran.dev`,
     author: `Arran White`,
     description: `Personal blog of Arran White`,
-    siteUrl: `https://gatsby-starter-blog-mdx-demo.netlify.com/`,
+    siteUrl: `https://arran.dev`,
     social: {
       twitter: `arranwhite_`,
       github: `arrwhidev`,
