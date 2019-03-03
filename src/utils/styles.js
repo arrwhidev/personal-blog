@@ -1,21 +1,27 @@
 import { css } from 'styled-components'
 
-const SIZES = {
-  giant: 3000,
-  desktop: 1300,
-  tablet: 768,
-  phone: 376,
+const SIZES = [
+    { type: 'giant', size: 3000 },
+    { type: 'desktop', size: 1300 },
+    { type: 'tablet', size: 768 },
+    { type: 'phone', size: 376 }
+]
+
+const toEm = t => SIZES.find(({type}) => type === t).size / 16;
+
+const calculateMinWidth = index => {
+    if (SIZES[index+1]) {
+        return toEm(SIZES[index+1].type)
+    }
+    return 0
 }
 
-// iterate through the sizes and create a media template
-export const media = Object.keys(SIZES).reduce((accumulator, label) => {
-  // use em in breakpoints to work properly cross-browser and support users
-  // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
-  const emSize = SIZES[label] / 16
-  accumulator[label] = (...args) => css`
-    @media (max-width: ${emSize}em) {
-      ${css(...args)};
+export const media = SIZES.reduce((acc, { type }, i) => {
+    return {
+        ...acc,
+        [type]: (...args) => css`
+            @media (min-width: ${calculateMinWidth(i)}em) and (max-width: ${toEm(type)}em) {
+                ${css(...args)};
+            }`
     }
-  `
-  return accumulator
 }, {})
