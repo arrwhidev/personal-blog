@@ -26,18 +26,23 @@ export const Code = ({ codeString, language, ...props }) => {
         theme={theme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre
-            className={`${className} main-content`}
-            style={{ ...style, ...pre_styles }}
-          >
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
+          <div style={{
+              paddingLeft: '20px',
+              paddingRight: '20px'
+          }}>
+            <pre
+                className={`${className} main-content`}
+                style={{ ...style, ...pre_styles }}
+            >
+                {tokens.map((line, i) => (
+                <div {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                    <span {...getTokenProps({ token, key })} />
+                    ))}
+                </div>
                 ))}
-              </div>
-            ))}
-          </pre>
+            </pre>
+          </div>
         )}
       </Highlight>
     )

@@ -50,8 +50,8 @@ export default ({ next, previous }) => {
           flexWrap: `wrap`,
           justifyContent: `space-between`,
           listStyle: `none`,
-          padding: 0,
           paddingTop: '10px',
+          marginLeft: 0
         }}
       >
         <li>{renderPrev(previous)}</li>
