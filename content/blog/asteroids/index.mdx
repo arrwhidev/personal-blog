@@ -7,16 +7,26 @@ keywords: ["Asteroids", "JavaScript", "Canvas"]
 currentlyListening: 'Fez OST'
 ---
 
+import OnlyDevices from '$components/OnlyDevices'
+import OnlyDesktop from '$components/OnlyDesktop'
 import Asteroids from '$components/blog/asteroids/Asteroids'
 
 A slightly more colourful rewrite of the arcade classic, Asteroids, with particles, for fun.
 
 [Code on GitHub](https://github.com/arrwhidev/asteroids)
 
-Controls;
- - Left arrow: rotate left
- - Right arrow: rotate right
- - W: move forward
- - Space: fire
+<OnlyDesktop>
+    <p>Controls;</p>
+    <ul>
+        <li><b>Left arrow</b>: rotate left</li>
+        <li><b>Right arrow</b>: rotate right</li>
+        <li><b>W</b>: move forward</li>
+        <li><b>Space</b>: fire</li>
+    </ul>    
+</OnlyDesktop>
+
+<OnlyDevices>
+    Sorry! Asteroids doesn't support devices. Please view this on a desktop to play.
+</OnlyDevices> 
 
 <Asteroids />

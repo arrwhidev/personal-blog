@@ -1,5 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import styled from 'styled-components'
+import { media } from '../../../utils/styles'
 
 const CANVAS_SCRIPT_SRC =
   'https://cdn.jsdelivr.net/gh/arrwhidev/canvas-game-loop@RELEASE/v1.0/canvas.js'

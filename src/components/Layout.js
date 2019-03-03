@@ -100,19 +100,62 @@ export default class GenericLayout extends React.Component {
       margin-top: ${rhythm(1.5)};
 
       .main-content {
-        margin-left: ${rhythm(2.2)};
-        max-width: ${rhythm(14)};
+        ${media.giant`
+            margin-left: ${rhythm(2.2)};
+            max-width: ${rhythm(14)};
+        `}
+        ${media.desktop`
+            margin-left: ${rhythm(2.2)};
+            max-width: ${rhythm(14)};
+        `}
+        ${media.tablet`
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: ${rhythm(3 / 4)};
+            padding-right: ${rhythm(3 / 4)};
+            max-width: ${rhythm(24)};
+        `}
+        ${media.phone`
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: ${rhythm(3 / 4)};
+            padding-right: ${rhythm(3 / 4)};
+            max-width: ${rhythm(24)};
+        `}
       }
 
-      p,
-      h1,
-      h2,
-      li,
-      hr,
-      a {
-        -webkit-filter: invert(100%);
-        filter: invert(100%);
+      .application {
+            ${media.tablet`
+                display: none;
+            `}
+            ${media.phone`
+                display: none;
+            `}
       }
+     
+      ${media.desktop`
+        p,
+        h1,
+        h2,
+        li,
+        hr,
+        a {
+            -webkit-filter: invert(100%);
+            filter: invert(100%);
+        }
+      `}
+
+      ${media.giant`
+        p,
+        h1,
+        h2,
+        li,
+        hr,
+        a {
+            -webkit-filter: invert(100%);
+            filter: invert(100%);
+        }
+      `}
     `
   }
 }
