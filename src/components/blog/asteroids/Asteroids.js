@@ -4,11 +4,14 @@ import { Helmet } from 'react-helmet'
 const CANVAS_SCRIPT_SRC =
   'https://cdn.jsdelivr.net/gh/arrwhidev/canvas-game-loop@RELEASE/v1.0/canvas.js'
 const ASTEROIDS_SCRIPT_SRC =
-  'https://cdn.jsdelivr.net/gh/arrwhidev/asteroids@RELEASE/v0.6/dist/bundle.js'
+  'https://cdn.jsdelivr.net/gh/arrwhidev/asteroids@RELEASE/v0.12/dist/bundle.js'
 
 export default class Asteroids extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      scripts: [],
+    }
   }
 
   componentDidMount() {
@@ -22,18 +25,18 @@ export default class Asteroids extends React.Component {
     this.updateCanvasSize = () => {
       const { w, h } = this.getCanvasDimensions()
       const canvas = document.getElementById('asteroids-canvas')
-      console.log('setting canvas size', w, h)
       canvas.width = w
       canvas.height = h
     }
 
     // Ensure that the canvas dimensions are updated when window is resized.
     window.addEventListener('resize', this.updateCanvasSize, false)
-    this.updateCanvasSize();
+    this.updateCanvasSize()
   }
 
   componentWillUnmount() {
-      window.removeEventListener('resize', this.updateCanvasSize)
+    window.removeEventListener('resize', this.updateCanvasSize)
+    window.killAsteroids()
   }
 
   handleScriptInject = (_, { scriptTags }) => {
@@ -46,13 +49,20 @@ export default class Asteroids extends React.Component {
   }
 
   handleOnLoad = (id, e) => {
-    console.log('handleOnLoad', id)
+    this.setState({
+      scripts: [...this.state.scripts, id],
+    })
+
+    if (this.state.scripts.length === 2) {
+      window.startAsteroids()
+    }
   }
 
   getCanvasDimensions = () => {
-    let w = 800, h = 800
+    let w = 800,
+      h = 800
     try {
-      w = window.innerWidth-15
+      w = window.innerWidth - 15
       h = window.innerHeight
     } catch (e) {}
     return { w, h }

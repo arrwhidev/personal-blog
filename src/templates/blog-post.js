@@ -65,7 +65,7 @@ export default class BlogPostTemplate extends React.Component {
       >
         {currentlyListening()}
         <div>
-            <MDXRenderer>{post.code.body}</MDXRenderer>
+          <MDXRenderer>{post.code.body}</MDXRenderer>
         </div>
         <PostFooter next={next} previous={previous} />
       </Layout>

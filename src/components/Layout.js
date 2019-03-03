@@ -20,9 +20,9 @@ export default class GenericLayout extends React.Component {
     } = this.props
     const Wrapper = isPhoto
       ? this.photoLayoutWrapper()
-      : isFull 
-        ? this.fullLayoutWrapper()
-        : this.normalLayoutWrapper()
+      : isFull
+      ? this.fullLayoutWrapper()
+      : this.normalLayoutWrapper()
 
     return (
       <Wrapper>
@@ -98,13 +98,18 @@ export default class GenericLayout extends React.Component {
   fullLayoutWrapper() {
     return styled.div`
       margin-top: ${rhythm(1.5)};
-      
+
       .main-content {
         margin-left: ${rhythm(2.2)};
         max-width: ${rhythm(14)};
       }
 
-      p, h1, h2, li, hr, a {
+      p,
+      h1,
+      h2,
+      li,
+      hr,
+      a {
         -webkit-filter: invert(100%);
         filter: invert(100%);
       }

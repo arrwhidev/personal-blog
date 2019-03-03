@@ -1,10 +1,10 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-const GUI_SCRIPTS_SRC = 
-    'https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.4/dat.gui.min.js'
+const GUI_SCRIPTS_SRC =
+  'https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.4/dat.gui.min.js'
 const PARTICLES_SCRIPT_SRC =
-    'https://cdn.jsdelivr.net/gh/arrwhidev/particles@012053ad1e71574541e26b0ca1969edf9202a659/dist/bundle.js'
+  'https://cdn.jsdelivr.net/gh/arrwhidev/particles@012053ad1e71574541e26b0ca1969edf9202a659/dist/bundle.js'
 
 export default class Particles extends React.Component {
   constructor(props) {
@@ -41,16 +41,17 @@ export default class Particles extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateCanvasSize)
-}
+  }
 
   handleOnLoad = (id, e) => {
     console.log('handleOnLoad', id)
   }
 
   getCanvasDimensions = () => {
-    let w = 800, h = 800
+    let w = 800,
+      h = 800
     try {
-      w = window.innerWidth-15
+      w = window.innerWidth - 15
       h = window.innerHeight
     } catch (e) {}
     return { w, h }
@@ -63,20 +64,25 @@ export default class Particles extends React.Component {
       <div
         className="application"
         style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            zIndex: -1,
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          zIndex: -1,
         }}
       >
         <Helmet
           script={[
             { src: GUI_SCRIPTS_SRC, id: 'gui_script' },
-            { src: PARTICLES_SCRIPT_SRC, id: 'particles_script' }
+            { src: PARTICLES_SCRIPT_SRC, id: 'particles_script' },
           ]}
           onChangeClientState={this.handleScriptInject}
         />
-        <canvas id="canvas" style={{ display: 'block', backgroundColor: 'white' }} width={w} height={h}></canvas>
+        <canvas
+          id="canvas"
+          style={{ display: 'block', backgroundColor: 'white' }}
+          width={w}
+          height={h}
+        />
       </div>
     )
   }
