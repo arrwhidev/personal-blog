@@ -3,14 +3,14 @@ import styled from 'styled-components'
 import { media } from '../utils/styles'
 
 export default ({ children }) => {
-  const StyledDiv = styled.div`${media.tablet`
+  const StyledDiv = styled.div`
+    ${media.tablet`
     display: none;
     `}
-${media.phone`
+    ${media.phone`
 display: none;
-`}`
+`}
+  `
 
-  return (
-      <StyledDiv className="main-content">{children}</StyledDiv>
-  )
+  return <StyledDiv className="main-content">{children}</StyledDiv>
 }

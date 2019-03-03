@@ -51,7 +51,7 @@ export default ({ next, previous }) => {
           justifyContent: `space-between`,
           listStyle: `none`,
           paddingTop: '10px',
-          marginLeft: 0
+          marginLeft: 0,
         }}
       >
         <li>{renderPrev(previous)}</li>
