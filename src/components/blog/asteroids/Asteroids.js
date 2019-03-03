@@ -1,19 +1,12 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
-import { media } from '../../../utils/styles'
 
-const CANVAS_SCRIPT_SRC =
-  'https://cdn.jsdelivr.net/gh/arrwhidev/canvas-game-loop@RELEASE/v1.0/canvas.js'
 const ASTEROIDS_SCRIPT_SRC =
   'https://cdn.jsdelivr.net/gh/arrwhidev/asteroids@RELEASE/v0.12/dist/bundle.js'
 
 export default class Asteroids extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      scripts: [],
-    }
   }
 
   componentDidMount() {
@@ -51,13 +44,7 @@ export default class Asteroids extends React.Component {
   }
 
   handleOnLoad = (id, e) => {
-    this.setState({
-      scripts: [...this.state.scripts, id],
-    })
-
-    if (this.state.scripts.length === 2) {
-      window.startAsteroids()
-    }
+    window.startAsteroids()
   }
 
   getCanvasDimensions = () => {
@@ -83,7 +70,6 @@ export default class Asteroids extends React.Component {
       >
         <Helmet
           script={[
-            { src: CANVAS_SCRIPT_SRC, id: 'canvas_script' },
             { src: ASTEROIDS_SCRIPT_SRC, id: 'asteroids_script' },
           ]}
           onChangeClientState={this.handleScriptInject}
