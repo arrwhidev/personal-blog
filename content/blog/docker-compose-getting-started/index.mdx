@@ -1,0 +1,272 @@
+---
+title: 'Docker Compose: Getting Started (Pt 1)'
+date: '2019-03-10'
+mode: 'blog'
+description: 'Getting started with Docker Compose.'
+keywords: ["Docker", "Docker Compose", "Go", "Node",]
+currentlyListening: 'The Legend of Zelda: Breath of the Wild OST' 
+---
+
+_NOTE: This isn't a Docker guide. It assumes you have a basic knowlege of Docker and the problems it solves._
+
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and managing applications which comprise of multiple Docker containers.
+
+First, let's create some working directories;
+
+```bash
+~ mkdir docker_compose_getting_started
+~ cd docker_compose_getting_started
+~ mkdir api web
+```
+
+Next let's create two simple applications; an API and a web server. I've chosen to write the API in [Go](https://golang.org/) and the web server in [Node](https://nodejs.org/en/) to keep things interesting. All the code is provided so don't worry if you are unfamiliar with these are technologies.
+
+## 1) JSON API
+
+## 1.1) Writing a simple API in Go
+
+In the `api` directory, create new file: `api.go`.
+
+In here we will define some tructures and hardcode some data. The `main()` function simply listens to the root path on port 80 and returns a JSON response containing all the data in response to all requests.
+
+I hardcoded the data in effort to keep things minimal. By the end of this post you will have the knowledge to enable you to move that data into a real database, also managed by Docker Compose.
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+)
+
+type director struct {
+	Name string `json:"name"`
+}
+
+type film struct {
+	Title    string   `json:"title"`
+	Year     int      `json:"year"`
+	Director director `json:"director"`
+}
+
+var spielberg = director{"Steven Spielberg"}
+var lucas = director{"George Lucas"}
+var kershner = director{"Irvin Kershner"}
+var marquand = director{"Richard Marquand"}
+var films = [...]film{
+	{"Indiana Jones: Raiders of the Lost Ark", 1981, spielberg},
+	{"Indiana Jones: Temple of Doom", 1984, spielberg},
+	{"Indiana Jones: The Last Crusade", 1989, spielberg},
+	{"Star Wars: Episode IV - A New Hope", 1977, lucas},
+	{"Star Wars: Episode V - The Empire Strikes Back", 1980, kershner},
+	{"Star Wars: Episode VI - Return of the Jedi", 1983, marquand},
+}
+
+func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        j, _ := json.Marshal(films)
+        w.Header().Set("Content-Type", "application/json")
+		w.Write(j)
+	})
+
+	log.Fatal(http.ListenAndServe(":80", nil))
+}
+```
+
+_Beware, this server is running on port 80 and may conflict with other web servers you have running._
+
+Let's make sure everything works.
+
+```bash
+~ go run api.go
+..
+~ curl localhost
+[{"title":"Indiana Jones: Raiders of the Lost Ark","year":1981,"director"....
+```
+
+Looks good!
+
+## 1.2) Dockerizing the Go API
+
+Create another file in the `api` directory: `Dockerfile`.
+
+```docker
+FROM golang:alpine
+
+WORKDIR /go/src/api
+COPY . .
+
+RUN go install -v ./...
+
+CMD ["api"]
+```
+
+This Dockerfile is pretty much as simple as it gets. In short we are defining an image using the 'golang:alpine' base image, copying our code and running it. 
+
+When you application becomes more complex, fetching dependencies etc, this file will need to reflect those changes.
+
+Ok, let's try out our container. I'm not going to explain most of the flags passed to these commands, please refer to the Docker documentation. I'll just say that we are building a container and running it. Finally, we are mapping port 80->8091 so the curl command has been updated to reflect this.
+
+```bash
+~ docker build -t getting-started-api .
+~ docker run -p 8091:80/tcp -it --rm getting-started-api
+..
+~ curl localhost:8091
+[{"title":"Indiana Jones: Raiders of the Lost Ark","year":1981,"director"....
+```
+
+Great, our container works too.
+
+## 2) Web server
+
+## 2.1) Writing a simple web server in Node
+
+In the `web` directory, create new file: `index.js`.
+
+```javascript
+const http = require('http')
+
+http.createServer(function(req, res) {
+    const content = '<p>No films.</p>'
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.write(`<html><body><h1>Films</h1>${content}</body></html>`)
+    res.end()
+}).listen(80)
+```
+
+Again, keeping this simple. This code will create a web server listening on port 80 which will return some HTML.
+
+```bash
+~ node index.js
+..
+~ curl localhost
+<html><body><h1>Films</h1>No films.</body></html>
+```
+
+## 2.2) Dockerizing the Node web server
+
+Next, create a `Dockerfile` in the `web` directory.
+
+```docker
+FROM node:10-alpine
+
+WORKDIR /getting-started-docker-compose/web
+COPY . .
+
+RUN npm install --prod
+
+CMD ["node", "index.js"]
+```
+
+Let's run it and make sure it works. Note that this image has a slightly different name and port.
+
+```bash
+~ docker build -t getting-started-web .
+~ docker run -p 8092:80/tcp --init -it --rm getting-started-web
+..
+~ curl localhost:8092
+<html><body><h1>Films</h1><p>No films.</p></body></html>
+```
+
+Awesome, this one works too.
+
+## 3) Creating the Docker Compose file
+
+Finally, we're here. Create `docker-compose.yml` in the top level directory: `docker_compose_getting_started`.
+
+```docker
+version: "3"
+
+services:
+  films-api:
+    build: ./api
+    ports:
+      - 8091:80
+
+  films-web:
+    build: ./web
+    ports:
+      - 8092:80
+    depends_on:
+      - films-api
+```
+
+That's it! 
+
+We've defined two services named `films-api` and `films-web`. Until now we had to use `docker build` to build our images. Docker Compose handles this for us, it just needs to be pointed to the directory containing the Dockerfile.
+
+We have also exposed our ports as we did previously in `docker run`. 
+
+Finally, we have a new concept, `depends_on`. This tells Docker Compose that `films-web` depends on `films-api`. This is especially handy when you have many services and databases. Internally this just ensures that the API is started before the web service. It does **NOT** wait for the API to be 'ready', to handle this please read the [documentation](https://docs.docker.com/compose/startup-order/).
+
+Let's give it a spin...
+
+```bash
+~ docker-compose up --build
+..
+~ curl localhost:8091
+[{"title":"Indiana Jones: Raiders of the Lost Ark","year":1981,"director"....
+~ curl localhost:8092
+<html><body><h1>Films</h1><p>No films.</p></body></html>
+```
+
+Now we have a single entry to spin up our containers.
+
+If you want to run it in detached mode use the `-d` flag. Later you can stop it by running `docker-compose down`.
+
+## 4) Enabling service communication
+
+We need our web server to fetch the films from the API. Hardcoding IP addresses/host names/ports in our services is far too brittle and error prone.
+
+Fortunately, Docker Compose makes this really easy. Each service joins a common network with the name of the service defined in `docker-compose.yml` used as the hostname.
+
+Let's update the web server to talk to the API. Replace `index.js` with the following code;
+
+```javascript
+const http = require('http')
+
+async function fetch(url) {
+    return new Promise((resolve, reject) => {
+        http.get(url, res => {
+            let data = ''
+        
+            res.on('data', (chunk) => {
+                data += chunk
+            })
+        
+            res.on('end', () => {
+                resolve(JSON.parse(data))
+            })
+        }).on('error', err => {
+            reject(err)
+        })
+    })
+}
+
+http.createServer(async function(req, res){
+    const films = await fetch('http://films-api')
+    const content = films
+        .map(({ title, year, director }) => 
+            `${title} (${year}) - Directed by ${director.name}`)
+        .reduce((list, str) => `${list}<li>${str}</li>`, '')
+
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.write(`<html><body><h1>Films</h1><ul>${content}</ul></body></html>`)
+    res.end()
+}).listen(80)
+```
+
+I've implemented a naive `fetch()` function using than pull in a dependency to do this - again keeping things simple. You'll see that we can now refer to the API using the service name defined in the Docker Compose file as the hostname `fetch('http://films-api')`.
+
+The end product is as follows;
+```bash
+~ docker-compose up --build
+..
+~ curl localhost:8092
+<html><body><h1>Films:</h1><ul><li>Indiana Jones: Raiders of the Lost Ark (19..
+```
+
+In part two we will learn how to use volumes in Docker Compose to enable hot reloading and we will move the hardcoded data into a real database.
+
+Get in touch on [twitter](https://twitter.com/arranwhite_) with any feedback.
