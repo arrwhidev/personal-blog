@@ -9,9 +9,9 @@ currentlyListening: 'The Legend of Zelda: Breath of the Wild OST'
 
 _NOTE: This isn't a Docker guide. It assumes you have a basic knowlege of Docker and the problems it solves._
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and managing applications which comprise of multiple Docker containers.
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and managing applications which consist of multiple Docker containers.
 
-First, let's create some working directories;
+To begin with, let's create some working directories;
 
 ```bash
 ~ mkdir docker_compose_getting_started
@@ -19,7 +19,7 @@ First, let's create some working directories;
 ~ mkdir api web
 ```
 
-Next let's create two simple applications; an API and a web server. I've chosen to write the API in [Go](https://golang.org/) and the web server in [Node](https://nodejs.org/en/) to keep things interesting. All the code is provided so don't worry if you are unfamiliar with these are technologies.
+Before we get started on the Docker stuff, we will create two simple applications; an API and a web server. I've chosen to write the API in [Go](https://golang.org/) and the web server in [Node](https://nodejs.org/en/) to keep things interesting. All the code is provided so don't worry if you are unfamiliar with these are technologies.
 
 ## 1) JSON API
 
@@ -27,9 +27,9 @@ Next let's create two simple applications; an API and a web server. I've chosen 
 
 In the `api` directory, create new file: `api.go`.
 
-In here we will define some tructures and hardcode some data. The `main()` function simply listens to the root path on port 80 and returns a JSON response containing all the data in response to all requests.
+In this file we will define some structures and hardcode some data. The `main()` function simply listens to the root path on port 80 and returns a JSON response containing all the data in response to all requests.
 
-I hardcoded the data in effort to keep things minimal. By the end of this post you will have the knowledge to enable you to move that data into a real database, also managed by Docker Compose.
+I hardcoded the data in an effort to keep things minimal. By the end of this post you will have the knowledge to enable you to move that data into a real database, also managed by Docker Compose.
 
 ```go
 package main
@@ -85,7 +85,7 @@ Let's make sure everything works.
 [{"title":"Indiana Jones: Raiders of the Lost Ark","year":1981,"director"....
 ```
 
-Looks good!
+Looks good! If you don't have `go` installed you can skip this step and trust that it works - you'll be able to run this code in a minute via Docker anyway.
 
 ## 1.2) Dockerizing the Go API
 
@@ -104,9 +104,9 @@ CMD ["api"]
 
 This Dockerfile is pretty much as simple as it gets. In short we are defining an image using the 'golang:alpine' base image, copying our code and running it. 
 
-When you application becomes more complex, fetching dependencies etc, this file will need to reflect those changes.
+When your application becomes more complex, fetching dependencies etc, this file will need to reflect those changes.
 
-Ok, let's try out our container. I'm not going to explain most of the flags passed to these commands, please refer to the Docker documentation. I'll just say that we are building a container and running it. Finally, we are mapping port 80->8091 so the curl command has been updated to reflect this.
+Ok, let's try out our container using the Docker cli. Note that we're mapping the port from 80->8091. I'm not going to explain the other flags passed to these commands, please refer to the [documentation](https://docs.docker.com/engine/reference/commandline/cli/).
 
 ```bash
 ~ docker build -t getting-started-api .
@@ -116,7 +116,9 @@ Ok, let's try out our container. I'm not going to explain most of the flags pass
 [{"title":"Indiana Jones: Raiders of the Lost Ark","year":1981,"director"....
 ```
 
-Great, our container works too.
+Great, our container works too. 
+
+*Now you can be sure the code works if you skipped it the first time. If you're new to Docker, this demonstrates the power of it. You can run code without installing the specific compiler/runtime 👍.*
 
 ## 2) Web server
 
@@ -173,7 +175,7 @@ Awesome, this one works too.
 
 ## 3) Creating the Docker Compose file
 
-Finally, we're here. Create `docker-compose.yml` in the top level directory: `docker_compose_getting_started`.
+Finally, we're here. Create `docker-compose.yml` in the top level directory `docker_compose_getting_started`.
 
 ```docker
 version: "3"
@@ -198,22 +200,24 @@ We've defined two services named `films-api` and `films-web`. Until now we had t
 
 We have also exposed our ports as we did previously in `docker run`. 
 
-Finally, we have a new concept, `depends_on`. This tells Docker Compose that `films-web` depends on `films-api`. This is especially handy when you have many services and databases. Internally this just ensures that the API is started before the web service. It does **NOT** wait for the API to be 'ready', to handle this please read the [documentation](https://docs.docker.com/compose/startup-order/).
+Also we've introduced a new concept; `depends_on`. This tells Docker Compose that `films-web` depends on `films-api`. This is especially useful when you have many services and databases. Internally this just ensures that the API is started before the web service. It does **NOT** wait for the API to be 'ready', to handle this please read the [documentation](https://docs.docker.com/compose/startup-order/).
 
-Let's give it a spin...
+Let's give it a spin... with one simple command;
 
 ```bash
 ~ docker-compose up --build
-..
+```
+
+Awesome, both services are up and running as expected;
+
+```bash
 ~ curl localhost:8091
 [{"title":"Indiana Jones: Raiders of the Lost Ark","year":1981,"director"....
 ~ curl localhost:8092
 <html><body><h1>Films</h1><p>No films.</p></body></html>
 ```
 
-Now we have a single entry to spin up our containers.
-
-If you want to run it in detached mode use the `-d` flag. Later you can stop it by running `docker-compose down`.
+You can also run in detached mode by adding the `-d` flag. Later you can stop it by running `docker-compose down`.
 
 ## 4) Enabling service communication
 
@@ -257,9 +261,10 @@ http.createServer(async function(req, res){
 }).listen(80)
 ```
 
-I've implemented a naive `fetch()` function using than pull in a dependency to do this - again keeping things simple. You'll see that we can now refer to the API using the service name defined in the Docker Compose file as the hostname `fetch('http://films-api')`.
+I've implemented a naive `fetch()` function rather than pulling in a dependency - again keeping things simple. You'll see that we can now refer to the API using the service name defined in the Docker Compose file as the hostname; `fetch('http://films-api')`.
 
-The end product is as follows;
+The result is;
+
 ```bash
 ~ docker-compose up --build
 ..
