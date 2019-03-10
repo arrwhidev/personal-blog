@@ -3,8 +3,9 @@ import styled from 'styled-components'
 
 export default ({ text, onClick }) => {
   const StyledButton = styled.button`
-    font-weight: 500;
-    font-size: 0.875rem;
+    background-color: #7cfbb9;
+    font-weight: 600;
+    font-size: 0.85rem;
     text-transform: uppercase;
     transition: all 0.2s ease-in-out;
     display: inline-block;
@@ -19,7 +20,6 @@ export default ({ text, onClick }) => {
     white-space: nowrap;
     user-select: none;
     position: relative;
-    color: #fff;
     overflow: hidden;
     margin-bottom: 25px;
 

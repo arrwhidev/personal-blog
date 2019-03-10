@@ -25,6 +25,7 @@ export default class BlogIndex extends React.Component {
           }}
         >
           <Link
+            className="green-bg"
             style={{
               boxShadow: `none`,
               textDecoration: `none`,
@@ -57,13 +58,13 @@ export default class BlogIndex extends React.Component {
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <Link to={node.fields.slug}>
                   <FontAwesomeIcon
                     icon={icon}
                     style={{
                       color: '#1d262f',
                       marginRight: '8px',
-                      height: '27px',
+                      height: '23px',
                     }}
                   />
                   {` ${title}`}

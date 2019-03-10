@@ -35,7 +35,7 @@ export default class GenericLayout extends React.Component {
           {header}
         </header>
         {children}
-        <Footer className="main-content" />
+        <Footer className="main-content" isFull />
       </Wrapper>
     )
   }
@@ -138,10 +138,20 @@ export default class GenericLayout extends React.Component {
         h1,
         h2,
         li,
-        hr,
         a {
-            -webkit-filter: invert(100%);
+            color: white;
+        }
+
+        hr {
             filter: invert(100%);
+                -webkit-filter: invert(100%);
+        }
+
+        footer {
+            svg{
+                filter: invert(100%);
+                -webkit-filter: invert(100%);
+            }
         }
       `}
 
@@ -150,10 +160,20 @@ export default class GenericLayout extends React.Component {
         h1,
         h2,
         li,
-        hr,
         a {
-            -webkit-filter: invert(100%);
+            color: white;
+        }
+
+        hr {
             filter: invert(100%);
+                -webkit-filter: invert(100%);
+        }
+
+        footer {
+            svg {
+            filter: invert(100%);
+            -webkit-filter: invert(100%);
+            }
         }
       `}
     `

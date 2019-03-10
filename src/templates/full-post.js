@@ -21,14 +21,14 @@ export default class BlogPostTemplate extends React.Component {
           }}
         >
           <Link
+            className="green-bg"
             style={{
               boxShadow: `none`,
               textDecoration: `none`,
-              color: `inherit`,
+              color: `black`,
             }}
-            to={`/`}
-          >
-            {siteTitle}
+            to={`/`}>
+                {siteTitle}
           </Link>
         </h3>
         <h1>{post.frontmatter.title}</h1>

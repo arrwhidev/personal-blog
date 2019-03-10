@@ -15,6 +15,10 @@ function Anchor({ href, component }) {
   const StyledAnchor = styled.a`
     box-shadow: none;
     padding-right: 10px;
+
+    :hover {
+        box-shadow: none;
+    }
   `
 
   return (
@@ -24,13 +28,17 @@ function Anchor({ href, component }) {
   )
 }
 
-export default ({ className }) => {
+export default ({ className, isFull }) => {
   const StyledFooter = styled.footer`
     padding-top: 40px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
   `
+
+  const anchorStyles = {
+      color: isFull? 'white' : 'inherit'
+  }
 
   return (
     <StaticQuery
@@ -43,11 +51,13 @@ export default ({ className }) => {
               style={{ width: '33%', marginRight: 'auto', marginLeft: 'auto' }}
             />
             <Anchor
+                style={anchorStyles}
               component={TwitterIcon}
               href={`https://twitter.com/${social.twitter}`}
             />
             {` `}
             <Anchor
+                style={anchorStyles}
               component={GithubIcon}
               href={`https://github.com/${social.github}`}
             />

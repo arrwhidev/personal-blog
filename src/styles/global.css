@@ -3,11 +3,12 @@ html {
 }
 
 a {
-    color: #5d8cc0
+    color: black;
+    box-shadow: 0 3px 0 0 #7cfbb9;
 }
 
-button {
-    background-color: #5d8cc0
+a:hover {
+    box-shadow: 0 3px 0 0 #cbf9e1;
 }
 
 li {
@@ -17,3 +18,18 @@ li {
 input {
     padding: 0;
 }
+
+code {
+    background-color: #cbf9e1;
+    padding-inline-start: 4px;
+    padding-inline-end: 4px;
+    font-family: Consolas, Menlo, Monaco;
+}
+
+.green-bg {
+    background-color: #7cfbb9;
+    padding-inline-start: 8px;
+    padding-inline-end: 8px;
+    color: black;
+}
+

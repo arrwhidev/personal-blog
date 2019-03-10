@@ -8,13 +8,18 @@ export default function Bio({ isPhoto, className = '' }) {
     ? {}
     : {
         display: `flex`,
-      }
+    }
 
   const textStyles = isPhoto
     ? {}
     : {
-        maxWidth: '240px',
-      }
+        maxWidth: '240px'
+    }
+
+    const bioStyles = isPhoto
+        ? {
+            color: 'white'
+        } : {}
 
   const text = isPhoto
     ? 'Photography by'
@@ -39,7 +44,7 @@ export default function Bio({ isPhoto, className = '' }) {
             />
             <p style={textStyles}>
               {`${text} `}
-              <a href={`https://twitter.com/${social.twitter}`}>
+              <a style={bioStyles} href={`https://twitter.com/${social.twitter}`}>
                 <strong>{author}</strong>.
               </a>
             </p>
