@@ -3,6 +3,13 @@ import Wordpress2016 from 'typography-theme-wordpress-2016'
 
 Wordpress2016.overrideThemeStyles = () => {
   return {
+    'a': {
+        color: 'black',
+        boxShadow: '0 3px 0 0 #7cfbb9'
+    },
+    'a:hover': {
+        boxShadow: '0 3px 0 0 #cbf9e1'
+    },
     'a.gatsby-resp-image-link': {
       boxShadow: `none`,
     },

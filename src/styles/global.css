@@ -2,15 +2,6 @@ html {
     background-color: white;
 }
 
-a {
-    color: black;
-    box-shadow: 0 3px 0 0 #7cfbb9;
-}
-
-a:hover {
-    box-shadow: 0 3px 0 0 #cbf9e1;
-}
-
 li {
     margin: 0;
 }
