@@ -1,2 +1,4 @@
+[build]
+  functions = "functions"
 [build.environment]
-  GO_IMPORT_PATH = "github.com/arrwhidev/personal-blog
+  GO_IMPORT_PATH = "github.com/arrwhidev/personal-blog"
