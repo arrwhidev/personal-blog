@@ -1,5 +1,3 @@
 build:
 	mkdir -p functions
-	cd ./src/functions
-	go get ./...
-	go build -o ../../functions/hello hello.go
+	cd ./src/functions && go get ./... && go build -o ../../functions/hello hello.go
