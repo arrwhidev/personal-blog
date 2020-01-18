@@ -1,4 +1,4 @@
 [build]
-  functions = "functions"
+  functions = "./src/functions"
 [build.environment]
   GO_IMPORT_PATH = "github.com/arrwhidev/personal-blog"
