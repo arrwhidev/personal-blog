@@ -1,0 +1,12 @@
+{ 
+    "blog": "amsterdam",
+    "images": [
+            { "name": "grid5_3.jpg", "type": "full" },
+            { "name": "grid4_1.jpg", "type": "twothirds" },
+            { "name": "grid4_2.jpg", "type": "third" },
+            { "name": "grid5_6.jpg", "type": "full" },
+            { "name": "sun_1.jpg", "type": "full" },
+            { "name": "grid5_1.jpg", "type": "full" },
+            { "name": "grid5_4.jpg", "type": "full" }
+    ]   
+}
