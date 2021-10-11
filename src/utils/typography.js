@@ -5,10 +5,10 @@ Wordpress2016.overrideThemeStyles = () => {
   return {
     'a': {
         color: 'black',
-        boxShadow: '0 3px 0 0 #7cfbb9'
+        boxShadow: '0 3px 0 0 #5BBCF5'
     },
     'a:hover': {
-        boxShadow: '0 3px 0 0 #cbf9e1'
+        boxShadow: '0 3px 0 0 #387497'
     },
     'a.gatsby-resp-image-link': {
       boxShadow: `none`,

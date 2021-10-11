@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export default ({ text, onClick }) => {
   const StyledButton = styled.button`
-    background-color: #7cfbb9;
+    background-color: #5BBCF5;
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
