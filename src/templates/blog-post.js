@@ -21,7 +21,7 @@ export default class BlogPostTemplate extends React.Component {
           }}
         >
           <Link
-            className="green-bg"
+            className="highlight-bg"
             style={{
               boxShadow: `none`,
               textDecoration: `none`,
@@ -32,7 +32,12 @@ export default class BlogPostTemplate extends React.Component {
             {siteTitle}
           </Link>
         </h3>
-        <h1>{post.frontmatter.title}</h1>
+        <h1
+          style={{
+            letterSpacing: `0.05rem`,
+          }}
+        >{post.frontmatter.title}
+        </h1>
         <p
           style={{
             ...scale(-1 / 5),

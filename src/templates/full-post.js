@@ -21,7 +21,7 @@ export default class BlogPostTemplate extends React.Component {
           }}
         >
           <Link
-            className="green-bg"
+            className="highlight-bg"
             style={{
               boxShadow: `none`,
               textDecoration: `none`,

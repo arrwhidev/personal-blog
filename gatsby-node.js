@@ -46,12 +46,22 @@ exports.createPages = ({ graphql, actions }) => {
 
 function createPages(posts, createPage) {
   posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node
-    const next = index === 0 ? null : posts[index - 1].node
+    const previous = index === posts.length - 1 ? null : posts[index + 1].node;
+    const next = index === 0 ? null : posts[index - 1].node;
+
+    const { mode } = post.node.frontmatter;
+    let component = COMPONENTS[mode];
+    if (mode == 'thoughts') {
+      component = COMPONENTS['blog'];
+    }
+
+    if (!component) {
+      throw new Error(`Unrecognised component for mode '${mode}'`);
+    }
 
     createPage({
       path: post.node.fields.slug,
-      component: COMPONENTS[post.node.frontmatter.mode],
+      component,
       context: {
         // Pass the current directory of the project as regex in context so that the GraphQL query can filter by it
         absolutePathRegex: `/^${path.dirname(post.node.fileAbsolutePath)}/`,

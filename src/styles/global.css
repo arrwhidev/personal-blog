@@ -17,10 +17,14 @@ code {
     font-family: Consolas, Menlo, Monaco;
 }
 
-.green-bg {
+.highlight-bg {
     background-color: #7cfbb9;
     padding-inline-start: 8px;
     padding-inline-end: 8px;
     color: black;
 }
 
+h2 > a {
+    line-height: 1.5;
+    letter-spacing: 0.05rem;
+}

@@ -6,8 +6,7 @@ import { rhythm, scale } from '../utils/typography'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCode, faCameraRetro } from '@fortawesome/free-solid-svg-icons'
-library.add(faCode)
-library.add(faCameraRetro)
+library.add(faCode, faCameraRetro)
 
 export default class BlogIndex extends React.Component {
   render() {
@@ -25,7 +24,7 @@ export default class BlogIndex extends React.Component {
           }}
         >
           <Link
-            className="green-bg"
+            className="highlight-bg"
             style={{
               boxShadow: `none`,
               textDecoration: `none`,
@@ -48,8 +47,18 @@ export default class BlogIndex extends React.Component {
         seoDescription={'Personal blog of Arran White. Code & photography.'}
       >
         {posts.map(({ node }) => {
-          const icon =
-            node.frontmatter.mode === 'photo' ? 'camera-retro' : 'code'
+          const { mode } = node.frontmatter;
+
+          let icon = 'code';
+
+          if (mode === 'photo') {
+            icon = 'camera-retro';
+          }
+      
+          if (mode === 'thoughts') {
+            icon = null; 
+          }
+
           const title = node.frontmatter.title || node.fields.slug
           return (
             <div key={node.fields.slug} className="main-content">
