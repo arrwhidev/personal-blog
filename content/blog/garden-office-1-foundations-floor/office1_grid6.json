@@ -1,0 +1,7 @@
+{ 
+    "blog": "garden-office-1-foundations-floor",
+    "images": [
+            { "name": "eight.jpg", "type": "full" },
+            { "name": "nine.jpg", "type": "full" }
+    ]   
+}

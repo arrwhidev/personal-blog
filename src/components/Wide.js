@@ -36,7 +36,7 @@ export default class Wide extends React.Component {
           }
         `}
         render={data => {
-          const { blog, name } = this.props
+          const { blog, name, alt } = this.props
 
           const images = data.images.edges
             .filter(node => {
@@ -48,6 +48,8 @@ export default class Wide extends React.Component {
 
           return (
             <Img
+              alt={alt || ''}
+              title={alt || ''}
               fluid={img.fluid}
               style={{
                 left: '0px',

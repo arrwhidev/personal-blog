@@ -1,0 +1,7 @@
+{ 
+    "blog": "garden-office-1-foundations-floor",
+    "images": [
+            { "name": "one.jpg", "type": "half", "alt": "Starting to clear the garden" },
+            { "name": "two.jpg", "type": "half", "alt": "Old shed demolished, ready to go" }
+    ]   
+}

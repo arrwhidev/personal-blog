@@ -1,0 +1,8 @@
+{ 
+    "blog": "garden-office-1-foundations-floor",
+    "images": [
+            { "name": "five.jpg", "type": "half", "alt": "Using the laser leveller" },
+            { "name": "six.jpg", "type": "half", "alt": "Tamping the hardcore" },
+            { "name": "seven.jpg", "type": "full", "alt": "All holes filled with hardcore" }
+    ]   
+}

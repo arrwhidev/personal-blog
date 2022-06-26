@@ -59,6 +59,8 @@ function createPages(posts, createPage) {
       throw new Error(`Unrecognised component for mode '${mode}'`);
     }
 
+    console.log('Creating page', post.node.fields.slug, mode);
+
     createPage({
       path: post.node.fields.slug,
       component,

@@ -1,0 +1,8 @@
+{ 
+    "blog": "garden-office-1-foundations-floor",
+    "images": [
+            { "name": "ten.jpg", "type": "half", "alt": "Nail gun in action" },
+            { "name": "11.jpg", "type": "half", "alt": "First frame section" },
+            { "name": "12.jpg", "type": "full", "alt": "All three frame sections complete with bracing" }
+    ]   
+}

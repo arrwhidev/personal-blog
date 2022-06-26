@@ -5,7 +5,26 @@ import { media } from '../utils/styles'
 import { StaticQuery, graphql } from 'gatsby'
 import { rhythm } from '../utils/typography'
 
-const GridLayout = styled.div`
+export const Wrapper = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+
+    ${media.giant`
+        max-width: ${rhythm(48)};
+    `}
+    ${media.desktop`
+        max-width: ${rhythm(28)};
+    `}
+    ${media.tablet`
+        max-width: ${rhythm(24)};
+    `}
+    ${media.phone`
+        max-width: ${rhythm(24)};
+    `}
+`
+
+export const GridLayout = styled.div`
     display: grid;
     grid-gap: 10px;
     padding: 10px;
@@ -24,7 +43,7 @@ const GridLayout = styled.div`
     `}
 `
 
-const FullImage = styled(Img)`
+export const FullImage = styled(Img)`
     ${media.giant`
         grid-column: span 6;
     `}
@@ -132,7 +151,7 @@ export default class Grid extends React.Component {
 
           const { manifest } = this.props
 
-          const renderImage = (image, size) => {
+          const renderImage = (image, size, alt='') => {
             const StyledImage = IMAGE_COMPONENTS[size]
 
             if (!StyledImage) {
@@ -141,15 +160,14 @@ export default class Grid extends React.Component {
               )
             }
 
-            return <StyledImage key={image.fluid.src} fluid={image.fluid} />
+            return <StyledImage key={image.fluid.src} fluid={image.fluid} alt={alt} title={alt} />
           }
 
-          const content = manifest.images.map(({ name, type }) => {
+          const content = manifest.images.map(({ name, type, alt }) => {
             const img = images.find(image => image.fluid.src.endsWith(name))
-            return renderImage(img, type)
+            return renderImage(img, type, alt)
           })
 
-          const Wrapper = this.photoLayoutWrapper()
           return (
             <Wrapper>
               <GridLayout>{content}</GridLayout>
@@ -158,26 +176,5 @@ export default class Grid extends React.Component {
         }}
       />
     )
-  }
-
-  photoLayoutWrapper() {
-    return styled.div`
-      margin-left: auto;
-      margin-right: auto;
-      padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
-
-      ${media.giant`
-          max-width: ${rhythm(48)};
-      `}
-      ${media.desktop`
-          max-width: ${rhythm(28)};
-      `}
-      ${media.tablet`
-          max-width: ${rhythm(24)};
-      `}
-      ${media.phone`
-          max-width: ${rhythm(24)};
-      `}
-    `
   }
 }

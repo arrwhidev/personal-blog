@@ -1,0 +1,7 @@
+{ 
+    "blog": "garden-office-1-foundations-floor",
+    "images": [
+            { "name": "three.jpg", "type": "half", "alt": "Digging holes" },
+            { "name": "four.jpg", "type": "half", "alt": "Aerial shot of holes" }
+    ]   
+}

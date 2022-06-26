@@ -12,37 +12,43 @@ export default class BlogPostTemplate extends React.Component {
     const { previous, next } = this.props.pageContext
 
     const header = ( //todo fragment?
-      <div>
-        <h3
+    <div>
+      <h3
+        style={{
+          fontFamily: `Montserrat, sans-serif`,
+          marginTop: 0,
+          marginBottom: rhythm(-1),
+        }}
+      >
+        <Link
+          className="highlight-bg"
           style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-            marginBottom: rhythm(-1),
+            boxShadow: `none`,
+            textDecoration: `none`,
+            color: `inherit`,
           }}
+          to={`/`}
         >
-          <Link
-            className="highlight-bg"
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `black`,
-            }}
-            to={`/`}>
-                {siteTitle}
-          </Link>
-        </h3>
-        <h1>{post.frontmatter.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: `block`,
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
-          {post.frontmatter.date}
-        </p>
-      </div>
+          {siteTitle}
+        </Link>
+      </h3>
+      <h1
+        style={{
+          letterSpacing: `0.05rem`,
+        }}
+      >{post.frontmatter.title}
+      </h1>
+      <p
+        style={{
+          ...scale(-1 / 5),
+          display: `block`,
+          marginBottom: rhythm(1),
+          marginTop: rhythm(-1),
+        }}
+      >
+        {post.frontmatter.date}
+      </p>
+    </div>
     )
 
     function currentlyListening() {
