@@ -1,0 +1,8 @@
+{ 
+    "blog": "garden-office-2-walls-roof",
+    "images": [
+            { "name": "walls-3.jpg", "type": "half", "alt": "A wall section before cladding" },
+            { "name": "walls-4.5.png", "type": "half", "alt": "Installing cladding" },
+            { "name": "walls-2.5.png", "type": "full", "alt": "Complete wall section" }
+    ]   
+}

@@ -1,0 +1,12 @@
+{ 
+    "blog": "garden-office-2-walls-roof",
+    "images": [
+            { "name": "roof-16.jpg", "type": "half", "alt": "Soffit cavity" },
+            { "name": "roof-18.jpg", "type": "half", "alt": "Soffit and fascia installed" },
+            { "name": "roof-21.jpg", "type": "half", "alt": "Attaching the guttering" },
+            { "name": "roof-22.jpg", "type": "half", "alt": "EPDM upstand" },
+            { "name": "roof-33.png", "type": "full", "alt": "Gutter drainpipe" },
+            { "name": "roof-24.jpg", "type": "full", "alt": "Roof complete side view" },
+            { "name": "roof-25.jpg", "type": "full", "alt": "Roof complete front view" }
+    ]   
+}

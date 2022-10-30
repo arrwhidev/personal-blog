@@ -1,0 +1,8 @@
+{ 
+    "blog": "garden-office-2-walls-roof",
+    "images": [
+            { "name": "roof-7.jpg", "type": "full", "alt": "Drilling holes in the roof joists for airflow" },
+            { "name": "roof-8.jpg", "type": "half", "alt": "Airflow holes" },
+            { "name": "roof-6.jpg", "type": "half", "alt": "Roof frame complete" }
+    ]   
+}

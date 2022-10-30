@@ -1,0 +1,7 @@
+{ 
+    "blog": "garden-office-2-walls-roof",
+    "images": [
+            { "name": "roof-12.jpg", "type": "half", "alt": "Bridge from house to office" },
+            { "name": "roof-13.jpg", "type": "half", "alt": "Sliding the roll of EPDM onto the office roof" }
+    ]   
+}
