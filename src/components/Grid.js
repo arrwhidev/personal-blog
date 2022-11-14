@@ -141,17 +141,36 @@ export default class Grid extends React.Component {
           }
         `}
         render={data => {
-          const { blog } = this.props.manifest
+          let blog = '';
+          let images = [];
 
-          const images = data.images.edges
+          if (this.props.manifest) {
+            blog = this.props.manifest.blog;
+            images = this.props.manifest.images;
+          } else {
+            blog = this.props.blog;
+            images = this.props.images;
+          }
+
+          const imageData = data.images.edges
             .filter(node => {
               return node.node.absolutePath.includes(blog)
             })
             .map(node => node.node.childImageSharp)
 
-          const { manifest } = this.props
-
-          const renderImage = (image, size, alt='') => {
+          if (imageData.length < 1) {
+            return (
+              <Wrapper>
+                <p style={{
+                  textAlign: 'center',
+                  backgroundColor: 'red',
+                  color: 'white',
+                }}>Can't find images in post: {blog}</p>
+            </Wrapper>
+            )
+          }
+          
+          const renderImage = (image, size='full', alt='') => {
             const StyledImage = IMAGE_COMPONENTS[size]
 
             if (!StyledImage) {
@@ -163,8 +182,16 @@ export default class Grid extends React.Component {
             return <StyledImage key={image.fluid.src} fluid={image.fluid} alt={alt} title={alt} />
           }
 
-          const content = manifest.images.map(({ name, type, alt }) => {
-            const img = images.find(image => image.fluid.src.endsWith(name))
+          const content = images.map(({ name, type, alt }) => {
+            const img = imageData.find(image => image.fluid.src.endsWith(name))
+            if (!img) {
+              return <p style={{
+                textAlign: 'center',
+                backgroundColor: 'red',
+                color: 'white',
+              }}>Can't find image with name: {name} in {blog}</p>
+            }
+
             return renderImage(img, type, alt)
           })
 
