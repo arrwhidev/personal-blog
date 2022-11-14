@@ -43,16 +43,28 @@ export default class Image extends React.Component {
 
           const img = images.find(image => image.fluid.src.endsWith(name))
 
-          return (
-            <Wrapper>
-                <FullImage 
-                  key={img.fluid.src} 
-                  fluid={img.fluid} 
-                  alt={alt} 
-                  title={alt} 
-                />
-            </Wrapper>
-          );
+          if (img) {
+            return (
+              <Wrapper>
+                  <FullImage 
+                    key={img.fluid.src} 
+                    fluid={img.fluid} 
+                    alt={alt} 
+                    title={alt} 
+                  />
+              </Wrapper>
+            );
+          } else {
+            return (
+              <Wrapper>
+                <p style={{
+                  textAlign: 'center',
+                  backgroundColor: 'red',
+                  color: 'white',
+                }}>Can't find image with name: {name}</p>
+              </Wrapper>
+            );
+          }
         }}
       />
     )
