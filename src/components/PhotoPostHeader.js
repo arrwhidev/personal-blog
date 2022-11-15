@@ -64,23 +64,31 @@ export default class Header extends React.Component {
     )
   }
 
-  bioContainer() {
+  scrollDownContainer() {
     return (
       <div
-        className="bio-container"
+        className="scroll-container"
         style={{
           display: 'block',
           position: 'relative',
           textAlign: 'center',
           marginLeft: '0px',
           marginRight: '0px',
+          fontSize: '200px',
           width: '100%',
           height: '15vh',
           zIndex: 5,
           color: 'white',
         }}
       >
-        <Bio isPhoto />
+        <ArrowIcon
+            style={{
+              width: '30%',
+              height: '30%',
+              filter: 'invert(100%)',
+              transform: 'translate(0px, -100px) rotate(90deg) ',
+            }}
+          />
       </div>
     )
   }
@@ -140,7 +148,7 @@ export default class Header extends React.Component {
         >
           {this.imageContainer()}
           {this.textContainer()}
-          {this.bioContainer()}
+          {this.scrollDownContainer()}
         </div>
       </header>
     )

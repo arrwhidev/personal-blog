@@ -183,7 +183,7 @@ export default class Grid extends React.Component {
           }
 
           const content = images.map(({ name, type, alt }) => {
-            const img = imageData.find(image => image.fluid.src.endsWith(name))
+            const img = imageData.find(image => image.fluid.src.endsWith(`/${name}`))
             if (!img) {
               return <p style={{
                 textAlign: 'center',
